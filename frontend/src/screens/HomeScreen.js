@@ -28,7 +28,7 @@ function HomeScreen() {
       <Row>
         {projects.map(project => (
           <Col md={3} key={project.id}>
-            <Project projects={project}/>
+            <Project project={project}/>
           </Col>
         ))}
       </Row>

@@ -22,6 +22,18 @@ main {
     min-height: 20rem;
 }
 
+.card {
+    /* border: .0001px solid lightgray; */
+    border: none;
+}
+
+.card:hover {
+    border: none;
+    -webkit-box-shadow: 4px 3px 5px 0px lightgray;
+    -moz-box-shadow: 4px 3px 5px 0px lightgray;
+    box-shadow: 4px 3px 5px 0px lightgray;
+}
+
 .blue-bg {
     background-color: blue;
 }
