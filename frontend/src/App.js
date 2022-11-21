@@ -7,7 +7,7 @@ function App() {
   return (
     <div>
       <Header />
-      <main className='py-3'>
+      <main className='py-3 main-bg'>
         <h1>Taskjar</h1>
       </main>
       <Footer />

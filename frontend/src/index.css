@@ -1,3 +1,23 @@
 main {
     min-height: 80vh;
+    margin-top: 5.7rem;
+}
+
+.main-bg {
+    background-color: rgba(211, 225, 229, 0.204);
+}
+
+.bg {
+    background-color: black;
+}
+
+.fixed-nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 5;
+}
+
+.footer {
+    min-height: 20rem;
 }
