@@ -1,10 +1,11 @@
 import React from 'react'
+import { Card } from 'react-bootstrap'
 
-function Project() {
+function Project({project}) {
   return (
-    <div>
+    <Card style={{border: 'none'}}>
       
-    </div>
+    </Card>
   )
 }
 

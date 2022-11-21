@@ -21,3 +21,7 @@ main {
 .footer {
     min-height: 20rem;
 }
+
+.blue-bg {
+    background-color: blue;
+}

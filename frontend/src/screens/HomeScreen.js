@@ -3,6 +3,7 @@ import { Row, Col, Button } from 'react-bootstrap'
 import Container from '@mui/material/Container';
 import { useDispatch, useSelector } from 'react-redux'
 import { listProjects } from '../actions/projectActions'
+import Project from '../components/Project'
 
 function HomeScreen() {
 
@@ -23,6 +24,13 @@ function HomeScreen() {
           <h5>All Projects</h5>
           <Button className='btn-md'>Create Project</Button>
         </span>
+      </Row>
+      <Row>
+        {projects.map(project => (
+          <Col md={3} key={project.id}>
+            <Project projects={project}/>
+          </Col>
+        ))}
       </Row>
     </Container>
   )
