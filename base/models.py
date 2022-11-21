@@ -10,6 +10,9 @@ class Project(models.Model):
     description = models.TextField(null=True, blank=True)
     createdAt = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return self.name
+
 class Task(models.Model):
     creator = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     handler = models.ForeignKey(User, related_name='handler', on_delete=models.SET_NULL, null=True, blank=True)
@@ -20,8 +23,14 @@ class Task(models.Model):
     description = models.TextField(null=True, blank=True)
     createdAt = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return self.name
+
 class Message(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
     body = models.TextField()
     createdAt = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.body[0:50]
