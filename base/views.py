@@ -17,6 +17,8 @@ def getRoutes(request):
     ]
     return Response(routes)
 
-# @api_view(['GET'])
-# def getProjects(request):
-#     reut
+@api_view(['GET'])
+def getProjects(request):
+    projects = Project.objects.all()
+    serializer = ProjectSerializer(projects, many=True)
+    return Response(serializer.data)
