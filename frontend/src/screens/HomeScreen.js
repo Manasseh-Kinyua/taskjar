@@ -25,9 +25,9 @@ function HomeScreen() {
           <Button className='btn-md'>Create Project</Button>
         </span>
       </Row>
-      <Row className='gap-2'>
+      <Row className=' py-3'>
         {projects.map(project => (
-          <Col md={3} key={project.id}>
+          <Col className='my-1' md={3} key={project.id}>
             <Project project={project}/>
           </Col>
         ))}

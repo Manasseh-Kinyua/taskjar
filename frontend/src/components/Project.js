@@ -10,7 +10,7 @@ function Project({project}) {
     <Card className='card' style={{background:'rgba(211, 225, 229, 0.204)', border:'none'}}>
       <Card.Body>
         <Card.Text>
-          <Link><strong>{project.name}</strong></Link>
+          <Link to={`/project/${project.id}`}><strong>{project.name}</strong></Link>
         </Card.Text>
         <Row>
           <div style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
