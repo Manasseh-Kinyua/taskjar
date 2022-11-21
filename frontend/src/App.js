@@ -1,16 +1,22 @@
-import {  } from 'react-bootstrap'
+import { BrowserRouter, Routes, Route } from 'react-bootstrap-dom'
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
+import HomeScreen from './screens/HomeScreen';
+
 function App() {
   return (
     <div>
-      <Header />
-      <main className='py-3 main-bg'>
-        <h1>Taskjar</h1>
-      </main>
-      <Footer />
+      <BrowserRouter>
+        <Header />
+        <main className='py-3 main-bg'>
+          <Routes>
+            <Route path='/' element={ <HomeScreen /> } />
+          </Routes>
+        </main>
+        <Footer />
+      </BrowserRouter>
     </div>
   );
 }
