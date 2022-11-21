@@ -1,11 +1,30 @@
-import React from 'react'
-import { Row, Col } from 'react-bootstrap'
+import React, { useEffect } from 'react'
+import { Row, Col, Button } from 'react-bootstrap'
+import Container from '@mui/material/Container';
+import { useDispatch, useSelector } from 'react-redux'
+import { listProjects } from '../actions/projectActions'
 
 function HomeScreen() {
+
+  const dispatch = useDispatch()
+
+  const projectList = useSelector(state => state.projectList)
+  const {loading, error, projects} = projectList
+  console.log(projects)
+
+  useEffect(() => {
+    dispatch(listProjects())
+  }, [dispatch])
+
   return (
-    <div>
-      <h1>Home screen</h1>
-    </div>
+    <Container maxWidth="xl">
+      <Row>
+        <span style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
+          <h5>All Projects</h5>
+          <Button className='btn-md'>Create Project</Button>
+        </span>
+      </Row>
+    </Container>
   )
 }
 
