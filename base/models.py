@@ -17,6 +17,11 @@ class Task(models.Model):
     name = models.CharField(max_length=250)
     type = models.CharField(max_length=250)
     status = models.CharField(max_length=250, blank=True)
-    # message
     description = models.TextField(null=True, blank=True)
+    createdAt = models.DateTimeField(auto_now_add=True)
+
+class Message(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    task = models.ForeignKey(Task, on_delete=models.CASCADE)
+    body = models.TextField()
     createdAt = models.DateTimeField(auto_now_add=True)
