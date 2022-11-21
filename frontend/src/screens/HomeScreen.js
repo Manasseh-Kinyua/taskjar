@@ -25,7 +25,7 @@ function HomeScreen() {
           <Button className='btn-md'>Create Project</Button>
         </span>
       </Row>
-      <Row>
+      <Row className='gap-2'>
         {projects.map(project => (
           <Col md={3} key={project.id}>
             <Project project={project}/>

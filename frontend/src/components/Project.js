@@ -2,7 +2,7 @@ import React from 'react'
 import { Row, Col, Card } from 'react-bootstrap'
 import Avatar from '@mui/material/Avatar';
 import Badge from '@mui/material/Badge';
-import MailIcon from '@mui/icons-material/Mail';
+import Chip from '@mui/material/Chip';
 import { Link } from 'react-router-dom'
 
 function Project({project}) {
@@ -21,10 +21,16 @@ function Project({project}) {
             </span>
           </div>
         </Row>
-        <Badge badgeContent={4} color="primary">
-          {/* <MailIcon color="action" /> */}
-          <strong>4</strong>
-        </Badge>
+        <Row className='py-3'>
+          <div style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
+            <Badge badgeContent={project.tasks.length} color="primary" showZero>
+              <Chip label="Tasks" color='primary' variant="outlined" />
+            </Badge>
+            <Badge badgeContent={project.contributors.length} color="secondary" showZero>
+              <Chip label="Contributors" color='secondary' variant="outlined" />
+            </Badge>
+          </div>
+        </Row>
         
       </Card.Body>
     </Card>
