@@ -11,7 +11,6 @@ function HomeScreen() {
 
   const projectList = useSelector(state => state.projectList)
   const {loading, error, projects} = projectList
-  console.log(projects)
 
   useEffect(() => {
     dispatch(listProjects())
