@@ -10,7 +10,7 @@ function Project({project}) {
       <Card className='card' >
         <Card.Body>
           <Card.Text>
-            <Link className='green-text' to={`/project/${project.id}`}><strong>{project.name}</strong></Link>
+            <Link className='green-text' to={`/project/${project.id}?name=${project.name}`}><strong>{project.name}</strong></Link>
           </Card.Text>
           <Row>
             <div style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
