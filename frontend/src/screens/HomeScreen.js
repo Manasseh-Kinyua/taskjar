@@ -21,8 +21,8 @@ function HomeScreen() {
     <Container maxWidth="xl">
       <Row>
         <span style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
-          <h5>All Projects</h5>
-          <Button className='btn-md'>Create Project</Button>
+          <h5>PROJECTS</h5>
+          <Button className='btn-md' style={{backgroundColor:'#20c997'}}>Create Project</Button>
         </span>
       </Row>
       <Row className=' py-3'>

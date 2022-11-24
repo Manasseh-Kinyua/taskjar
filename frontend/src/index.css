@@ -1,14 +1,17 @@
 main {
     min-height: 80vh;
-    margin-top: 5.7rem;
+    margin-top: 5.5rem;
 }
 
 .main-bg {
-    background-color: rgba(211, 225, 229, 0.204);
+    /* background-color: rgba(211, 225, 229, 0.204); */
+    background-color: rgba(141, 87, 154, 0.204);
 }
 
 .bg {
-    background-color: black;
+    /* background-color: black; */
+    /* background-color: rgb(23, 8, 23); */
+    background-color: rgb(208, 41, 208);
 }
 
 .fixed-nav {
@@ -16,23 +19,33 @@ main {
     top: 0;
     width: 100%;
     z-index: 5;
+    
 }
 
 .footer {
     min-height: 20rem;
 }
 
-.card {
-    /* border: .0001px solid lightgray; */
-    border: none;
+.green-text {
+    color: #20c997;
 }
 
-.card:hover {
+.text-b {
+    background-color: #009670;
+    padding: 1rem;
+}
+
+/* .card {
+    border: none;
+    border: none;
+} */
+
+/* .card:hover {
     border: none;
     -webkit-box-shadow: 4px 3px 5px 0px lightgray;
     -moz-box-shadow: 4px 3px 5px 0px lightgray;
-    box-shadow: 4px 3px 5px 0px lightgray;
-}
+    box-shadow: 4px 3px 5px 0px rgb(24, 22, 24);
+} */
 
 .blue-bg {
     background-color: blue;

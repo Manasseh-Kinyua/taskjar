@@ -4,8 +4,8 @@ import { LinkContainer } from 'react-router-bootstrap'
 
 function Header() {
   return (
-    <header className='fixed-nav bg'>
-        <Navbar className='bg'  variant="dark" expand="lg" collapseOnSelect>
+    <header  className='fixed-nav '>
+        <Navbar style={{minHeight:'10vh'}} className='bg'  variant="dark" expand="lg" collapseOnSelect>
                 <Container>
                     <LinkContainer to='/'>
                         <Navbar.Brand><Image style={{width:'8%', marginRight:'.6rem'}} src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSV4rK81-ngDpTadiTjXawJXtwmxEY7ND-YhQ&usqp=CAU' /><strong>Taskjar</strong></Navbar.Brand>

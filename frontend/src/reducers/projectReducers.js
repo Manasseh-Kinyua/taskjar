@@ -2,6 +2,10 @@ import {
     PROJECT_LIST_REQUEST,
     PROJECT_LIST_SUCCESS,
     PROJECT_LIST_FAIL,
+
+    PROJECT_DETAILS_REQUEST,
+    PROJECT_DETAILS_SUCCESS,
+    PROJECT_DETAILS_FAIL,
 } from '../constants/projectConstants'
 
 export const projectListReducer = (state = {projects:[]}, action) => {
@@ -19,6 +23,31 @@ export const projectListReducer = (state = {projects:[]}, action) => {
             }
 
         case PROJECT_LIST_FAIL:
+            return {
+                loading: false,
+                error: action.payload
+            }
+
+        default:
+            return state
+    }
+}
+
+export const projectDetailsReducer = (state = {project:{}}, action) => {
+    switch(action.type) {
+        case PROJECT_DETAILS_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            }
+
+        case PROJECT_DETAILS_SUCCESS:
+            return {
+                loading: false,
+                project: action.payload
+            }
+
+        case PROJECT_DETAILS_FAIL:
             return {
                 loading: false,
                 error: action.payload
