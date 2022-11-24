@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react'
-import { Row, Col, Card, ListGroup } from 'react-bootstrap'
+import { Row, Col, Card, ListGroup, Button } from 'react-bootstrap'
 import Container from '@mui/material/Container';
 import { AvatarGroup } from '@mui/material';
 import { Avatar } from '@mui/material';
+import { Chip } from '@mui/material';
+import { Badge } from '@mui/material';
 import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
@@ -22,12 +24,11 @@ function ProjectScreen() {
 
   const projectDetails = useSelector(state => state.projectDetails)
   const {loading, error, project} = projectDetails
-  console.log(project)
 
   useEffect(() => {
     dispatch(listProjectDetails(projectId))
 
-  }, [dispatch])
+  }, [dispatch, projectId])
 
   return (
     <div>
@@ -55,6 +56,11 @@ function ProjectScreen() {
 
                   <ListGroup.Item>
                       {project.description}
+                  </ListGroup.Item>
+                  <ListGroup.Item>
+                    <Badge badgeContent={project.tasks && project.tasks.length} color="secondary" showZero>
+                      <Chip label="Tasks" color='secondary' variant="outlined" />
+                    </Badge>
                   </ListGroup.Item>
 
                   <ListGroup.Item>
@@ -91,7 +97,7 @@ function ProjectScreen() {
 
             <Col md={2}>
               <Card style={{padding:'1rem'}}>
-                <Link>View Tasks</Link>
+                <Link to={`/project/${project.id}/tasks?name=${project.name}`}><Button style={{backgroundColor:'#20c997'}}>View Tasks</Button></Link>
               </Card>
             </Col>
         </Row>
