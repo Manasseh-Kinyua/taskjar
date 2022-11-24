@@ -66,12 +66,12 @@ export const createProject = (project) => async (dispatch) => {
             }
         }
 
-        const {data} = await axios.get(
+        const {data} = await axios.post(
             CREATE_PROJECT_ENDPOINT,
             project,
             config
         )
-        
+
         dispatch({
             type: PROJECT_CREATE_SUCCESS,
             payload: data

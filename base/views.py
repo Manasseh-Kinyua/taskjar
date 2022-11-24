@@ -38,8 +38,8 @@ def createProject(request):
 
     project = Project.objects.create(
         scrum=scrum,
-        name=data['name'],
-        description=data['description']
+        name='Sample Name',
+        description='Sample Description'
     )
     serializer = ProjectSerializer(project, many=False)
 
