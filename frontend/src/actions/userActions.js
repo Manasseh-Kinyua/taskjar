@@ -6,7 +6,7 @@ import {
 import { USER_LOGIN_ENDPOINT } from "../constants/apiConstants";
 import axios from 'axios'
 
-export const login = (user) => async (dispatch) => {
+export const login = (email, password) => async (dispatch) => {
     try {
         dispatch({type: USER_LOGIN_REQUEST})
 
@@ -18,7 +18,7 @@ export const login = (user) => async (dispatch) => {
 
         const {data} = await axios.post(
             USER_LOGIN_ENDPOINT,
-            user,
+            {'username': email, 'password': password},
             config
         )
 

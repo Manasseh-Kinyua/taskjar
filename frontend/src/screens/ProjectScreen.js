@@ -10,6 +10,8 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, useParams } from 'react-router-dom'
 import { listProjectDetails } from '../actions/projectActions'
+import Loader from '../components/Loader';
+import Message from '../components/Message';
 
 function ProjectScreen() {
 
@@ -34,47 +36,53 @@ function ProjectScreen() {
     <div>
       <Container maxWidth="xl">
         <Row className='gap-1'>
-            <Col md={5}>
-              <Card style={{padding:'1rem'}}>
-                <h5 style={{textTransform:'uppercase'}}>{project.name}</h5>
-                <ListGroup>
-                  <Row>
-                  <Col>
-                    <ListGroup.Item>
-                      <strong>Creator</strong>
-                    </ListGroup.Item>
-                  </Col>
-                  <Col>
-                    <ListGroup.Item>
-                      <span style={{display:'flex', alignItems:'center', justifyContent:'space-around'}}>
-                          <Avatar alt="Remy Sharp" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFNkJpg5tIB3DZsMqxgGCyRtSwDuav9LEdbZI06evMasI6tmkPahgI1ftvuA7qbHSsbgg&usqp=CAU" />
-                          <strong className='green-text pl-2'>@{project.scrum}</strong>
-                      </span>
-                    </ListGroup.Item>
-                  </Col>
-                  </Row>
+            {loading ? (
+              <Loader />
+            ) : error ? (
+              <Message variant='danger'>{error}</Message>
+            ) : (
+              <Col md={5}>
+                <Card style={{padding:'1rem'}}>
+                  <h5 style={{textTransform:'uppercase'}}>{project.name}</h5>
+                  <ListGroup>
+                    <Row>
+                    <Col>
+                      <ListGroup.Item>
+                        <strong>Creator</strong>
+                      </ListGroup.Item>
+                    </Col>
+                    <Col>
+                      <ListGroup.Item>
+                        <span style={{display:'flex', alignItems:'center', justifyContent:'space-around'}}>
+                            <Avatar alt="Remy Sharp" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFNkJpg5tIB3DZsMqxgGCyRtSwDuav9LEdbZI06evMasI6tmkPahgI1ftvuA7qbHSsbgg&usqp=CAU" />
+                            <strong className='green-text pl-2'>@{project.scrum}</strong>
+                        </span>
+                      </ListGroup.Item>
+                    </Col>
+                    </Row>
 
-                  <ListGroup.Item>
-                      {project.description}
-                  </ListGroup.Item>
-                  <ListGroup.Item>
-                    <Badge badgeContent={project.tasks && project.tasks.length} color="secondary" showZero>
-                      <Chip label="Tasks" color='secondary' variant="outlined" />
-                    </Badge>
-                  </ListGroup.Item>
+                    <ListGroup.Item>
+                        {project.description}
+                    </ListGroup.Item>
+                    <ListGroup.Item>
+                      <Badge badgeContent={project.tasks && project.tasks.length} color="secondary" showZero>
+                        <Chip label="Tasks" color='secondary' variant="outlined" />
+                      </Badge>
+                    </ListGroup.Item>
 
-                  <ListGroup.Item>
-                    <AvatarGroup max={2}>
-                      <Avatar alt="Remy Sharp" src="https://www.shutterstock.com/image-illustration/male-profile-picture-silhouette-avatar-260nw-149293406.jpg" />
-                      <Avatar alt="Remy Sharp" src="https://www.shutterstock.com/image-illustration/male-profile-picture-silhouette-avatar-260nw-149293406.jpg" />
-                      <Avatar alt="Remy Sharp" src="https://www.shutterstock.com/image-illustration/male-profile-picture-silhouette-avatar-260nw-149293406.jpg" />
-                      <Avatar alt="Remy Sharp" src="https://www.shutterstock.com/image-illustration/male-profile-picture-silhouette-avatar-260nw-149293406.jpg" />
-                      <Avatar alt="Remy Sharp" src="https://www.shutterstock.com/image-illustration/male-profile-picture-silhouette-avatar-260nw-149293406.jpg" />
-                    </AvatarGroup>
-                  </ListGroup.Item>
-                </ListGroup>
-              </Card>
-            </Col>
+                    <ListGroup.Item>
+                      <AvatarGroup max={2}>
+                        <Avatar alt="Remy Sharp" src="https://www.shutterstock.com/image-illustration/male-profile-picture-silhouette-avatar-260nw-149293406.jpg" />
+                        <Avatar alt="Remy Sharp" src="https://www.shutterstock.com/image-illustration/male-profile-picture-silhouette-avatar-260nw-149293406.jpg" />
+                        <Avatar alt="Remy Sharp" src="https://www.shutterstock.com/image-illustration/male-profile-picture-silhouette-avatar-260nw-149293406.jpg" />
+                        <Avatar alt="Remy Sharp" src="https://www.shutterstock.com/image-illustration/male-profile-picture-silhouette-avatar-260nw-149293406.jpg" />
+                        <Avatar alt="Remy Sharp" src="https://www.shutterstock.com/image-illustration/male-profile-picture-silhouette-avatar-260nw-149293406.jpg" />
+                      </AvatarGroup>
+                    </ListGroup.Item>
+                  </ListGroup>
+                </Card>
+              </Col>
+            )}
             
             <Col md={4}>
               <Card style={{padding:'1rem'}}>

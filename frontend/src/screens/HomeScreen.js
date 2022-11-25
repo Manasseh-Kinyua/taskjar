@@ -4,6 +4,8 @@ import Container from '@mui/material/Container';
 import { useDispatch, useSelector } from 'react-redux'
 import { listProjects } from '../actions/projectActions'
 import Project from '../components/Project'
+import Loader from '../components/Loader';
+import Message from '../components/Message';
 
 function HomeScreen() {
 
@@ -24,13 +26,19 @@ function HomeScreen() {
           <Button className='btn-md' style={{backgroundColor:'#20c997'}}>Create Project</Button>
         </span>
       </Row>
-      <Row className=' py-3'>
-        {projects.map(project => (
-          <Col className='my-1' md={3} key={project.id}>
-            <Project project={project}/>
-          </Col>
-        ))}
-      </Row>
+      {loading ? (
+        <Loader />
+      ) : error ? (
+        <Message variant='danger'>{error}</Message>
+      ) : (
+        <Row className=' py-3'>
+          {projects.map(project => (
+            <Col className='my-1' md={3} key={project.id}>
+              <Project project={project}/>
+            </Col>
+          ))}
+        </Row>
+      )}
     </Container>
   )
 }
