@@ -44,3 +44,17 @@ def createProject(request):
     serializer = ProjectSerializer(project, many=False)
 
     return Response(serializer.data)
+
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def editProject(request, pk):
+    data = request.data
+    project = Project.objects.get(id=pk)
+
+    project.name=data['name']
+    project.description=data['description']
+
+    project.save()
+    serializer = ProjectSerializer(project, many=False)
+
+    return Response(serializer.data)
