@@ -38,6 +38,7 @@ class TaskSerializer(serializers.ModelSerializer):
 
 class ProjectSerializer(serializers.ModelSerializer):
     tasks = serializers.SerializerMethodField(read_only=True)
+    scrum = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = Project
@@ -46,4 +47,9 @@ class ProjectSerializer(serializers.ModelSerializer):
     def get_tasks(self, obj):
         tasks = obj.task_set.all()
         serializer = TaskSerializer(tasks, many=True)
+        return serializer.data
+
+    def get_scrum(self, obj):
+        scrum = obj.scrum
+        serializer = UserSerializer(scrum, many=False)
         return serializer.data

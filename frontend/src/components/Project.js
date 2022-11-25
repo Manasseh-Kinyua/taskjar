@@ -13,14 +13,17 @@ function Project({project}) {
 
   const dispatch = useDispatch()
 
-  const projectDelete = useSelector(state => state.projectDelete)
-  const {success} = projectDelete
+  // const projectDelete = useSelector(state => state.projectDelete)
+  // const {success} = projectDelete
 
-  useEffect(() => {
-    // if(success) {
-    //   dispatch()
-    // }
-  }, [success])
+  const userLogin = useSelector(state => state.userLogin)
+  const {userInfo} = userLogin
+
+  // useEffect(() => {
+  //   // if(success) {
+  //   //   dispatch()
+  //   // }
+  // }, [success])
 
   const deleteProjectHandler = (id) => {
     dispatch(deleteProject(id))
@@ -37,7 +40,7 @@ function Project({project}) {
               <strong>Scrum</strong>
               <span style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
                 <Avatar alt="Remy Sharp" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFNkJpg5tIB3DZsMqxgGCyRtSwDuav9LEdbZI06evMasI6tmkPahgI1ftvuA7qbHSsbgg&usqp=CAU" />
-                <small className='green-text'>@{project.scrum}</small>
+                <small className='green-text'>@{project.scrum.name}</small>
               </span>
             </div>
           </Row>
@@ -52,15 +55,18 @@ function Project({project}) {
             </div>
           </Row>
           <hr style={{margin:'0'}}></hr>
-          <Row className='py-1'>
-            <div style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
-              <Link to={`/project/${project.id}/edit`}><EditIcon /></Link>
-              <span
-                onClick={() => deleteProjectHandler(project.id)}
-                >
-                  <DeleteIcon /></span>
-            </div>
-          </Row>
+          {userInfo && userInfo.id == project.scrum.id && (
+            <Row className='py-1'>
+              <div style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
+                <Link to={`/project/${project.id}/edit`}><EditIcon /></Link>
+                <span
+                  onClick={() => deleteProjectHandler(project.id)}
+                  >
+                    <DeleteIcon /></span>
+              </div>
+            </Row>
+            )}
+          {/* )} */}
           
         </Card.Body>
       </Card>
