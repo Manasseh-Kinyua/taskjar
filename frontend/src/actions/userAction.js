@@ -3,8 +3,8 @@ import {
     USER_LOGIN_SUCCESS,
     USER_LOGIN_FAIL,
 } from "../constants/userConstants";
-import axios from 'axios'
 import { USER_LOGIN_ENDPOINT } from "../constants/apiConstants";
+import axios from 'axios'
 
 export const login = (user) => async (dispatch) => {
     try {
