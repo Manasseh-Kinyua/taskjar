@@ -55,7 +55,7 @@ function ProjectScreen() {
                       <ListGroup.Item>
                         <span style={{display:'flex', alignItems:'center', justifyContent:'space-around'}}>
                             <Avatar alt="Remy Sharp" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFNkJpg5tIB3DZsMqxgGCyRtSwDuav9LEdbZI06evMasI6tmkPahgI1ftvuA7qbHSsbgg&usqp=CAU" />
-                            <strong className='green-text pl-2'>@{project.scrum.name}</strong>
+                            <strong className='green-text pl-2'>@{project.scrum && project.scrum.name}</strong>
                         </span>
                       </ListGroup.Item>
                     </Col>
@@ -93,8 +93,8 @@ function ProjectScreen() {
                       <span  style={{display:'flex', alignItems:'center'}}>
                         <Avatar sx={{ width: 50, height: 50 }} alt="Remy Sharp" src="https://www.shutterstock.com/image-illustration/male-profile-picture-silhouette-avatar-260nw-149293406.jpg" />
                         <span style={{marginLeft:'1rem', display:'flex', flexDirection:'column'}}>
-                          <small style={{fontSize:'1rem',}} className='green-text'>@{contributor}</small>
-                          <small style={{fontSize:'.9rem',}} >{contributor}</small>
+                          <small style={{fontSize:'1rem',}} className='green-text'>@{contributor && contributor.name}</small>
+                          <small style={{fontSize:'.9rem',}} >{contributor && contributor.email}</small>
                         </span>
                       </span>
                       </ListGroup.Item>
