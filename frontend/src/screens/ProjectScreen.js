@@ -55,7 +55,7 @@ function ProjectScreen() {
                       <ListGroup.Item>
                         <span style={{display:'flex', alignItems:'center', justifyContent:'space-around'}}>
                             <Avatar alt="Remy Sharp" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFNkJpg5tIB3DZsMqxgGCyRtSwDuav9LEdbZI06evMasI6tmkPahgI1ftvuA7qbHSsbgg&usqp=CAU" />
-                            <strong className='green-text pl-2'>@{project.scrum}</strong>
+                            <strong className='green-text pl-2'>@{project.scrum.name}</strong>
                         </span>
                       </ListGroup.Item>
                     </Col>
