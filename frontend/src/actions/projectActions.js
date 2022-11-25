@@ -111,14 +111,19 @@ export const editProject = (project) => async (dispatch, getState) => {
             }
         }
 
-        const {data} = await axios.put (
-            EDIT_PROJECT_ENDPOINT,
+        const {data} = await axios.put(
+            `${EDIT_PROJECT_ENDPOINT}${project.id}/`,
             project,
             config
         )
 
         dispatch({
             type: PROJECT_EDIT_SUCCESS,
+            payload: data
+        })
+
+        dispatch({
+            type: PROJECT_DETAILS_SUCCESS,
             payload: data
         })
 

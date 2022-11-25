@@ -101,6 +101,7 @@ export const projectEditReducer = (state = {}, action) => {
         case PROJECT_EDIT_SUCCESS:
             return {
                 loading: false,
+                success: true,
                 project: action.payload
             }
 

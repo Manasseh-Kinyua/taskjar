@@ -3,6 +3,8 @@ import { Row, Col, Card } from 'react-bootstrap'
 import Avatar from '@mui/material/Avatar';
 import Badge from '@mui/material/Badge';
 import Chip from '@mui/material/Chip';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { Link } from 'react-router-dom'
 
 function Project({project}) {
@@ -29,6 +31,13 @@ function Project({project}) {
               <Badge badgeContent={project.contributors.length} color="secondary" showZero>
                 <Chip label="Contributors" color='secondary' variant="outlined" />
               </Badge>
+            </div>
+          </Row>
+          <hr style={{margin:'0'}}></hr>
+          <Row className='py-1'>
+            <div style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
+              <Link to={`/project/${project.id}/edit`}><EditIcon /></Link>
+              <DeleteIcon />
             </div>
           </Row>
           

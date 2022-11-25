@@ -8,6 +8,7 @@ import ProjectScreen from './screens/ProjectScreen';
 import TaskListScreen from './screens/TaskListScreen';
 import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
+import ProjectEditScreen from './screens/ProjectEditScreen';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path='/project/:id/tasks' element={ <TaskListScreen /> } />
             <Route path='/login' element={ <LoginScreen /> } />
             <Route path='/register' element={ <RegisterScreen /> } />
+            <Route path='/project/:id/edit' element={ <ProjectEditScreen /> } />
           </Routes>
         </main>
         <Footer />
