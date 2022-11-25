@@ -56,19 +56,24 @@ export const listProjectDetails = (id) => async (dispatch) => {
     }
 }
 
-export const createProject = (project) => async (dispatch) => {
+export const createProject = () => async (dispatch, getState) => {
     try {
         dispatch({type: PROJECT_CREATE_REQUEST})
 
+        const {
+            userLogin: {userInfo}
+        } = getState()
+
         const config = {
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${userInfo.token}`
             }
         }
 
         const {data} = await axios.post(
             CREATE_PROJECT_ENDPOINT,
-            project,
+            {},
             config
         )
 

@@ -6,6 +6,7 @@ import { listProjects } from '../actions/projectActions'
 import Project from '../components/Project'
 import Loader from '../components/Loader';
 import Message from '../components/Message';
+import { Link } from 'react-router-dom';
 
 function HomeScreen() {
 
@@ -13,6 +14,9 @@ function HomeScreen() {
 
   const projectList = useSelector(state => state.projectList)
   const {loading, error, projects} = projectList
+
+  const userLogin = useSelector(state => state.userLogin)
+  const {userInfo} = userLogin
 
   useEffect(() => {
     dispatch(listProjects())
@@ -23,7 +27,11 @@ function HomeScreen() {
       <Row>
         <span style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
           <h5>PROJECTS</h5>
-          <Button className='btn-md' style={{backgroundColor:'#20c997'}}>Create Project</Button>
+          {userInfo ? (
+            <Button className='btn-md' style={{backgroundColor:'#20c997'}}>Create Project</Button>
+          ) : (
+            <Message variant='info'>Login to create project: <Link to='/login'> Login</Link></Message>
+          )}
         </span>
       </Row>
       {loading ? (
