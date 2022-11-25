@@ -49,3 +49,10 @@ def editProject(request, pk):
     serializer = ProjectSerializer(project, many=False)
 
     return Response(serializer.data)
+
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def deleteProject(request, pk):
+    project = Project.objects.get(id=pk)
+    project.delete()
+    return Response('Project was deleted successfully')
