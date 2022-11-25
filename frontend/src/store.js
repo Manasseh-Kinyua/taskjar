@@ -3,13 +3,14 @@ import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
 import { projectCreateReducer, projectDetailsReducer, projectListReducer } from './reducers/projectReducers'
-import { userLoginReducer } from './reducers/userReducers'
+import { userLoginReducer, userRegisterReducer } from './reducers/userReducers'
 
 const reducer = combineReducers({
     projectList: projectListReducer,
     projectDetails: projectDetailsReducer,
     projectCreate: projectCreateReducer,
 
+    userRegister: userRegisterReducer,
     userLogin: userLoginReducer,
 })
 

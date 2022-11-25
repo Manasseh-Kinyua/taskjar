@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Col, Card, Form, Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 import { login } from '../actions/userActions'
 import { useNavigate } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
@@ -77,7 +78,11 @@ function LoginScreen() {
                     Login
                 </Button>
               </span>
+              
             </Form>
+            <span style={{padding:'1px', textAlign:'center'}}>
+              <small >Don't have an account yet? <Link to={redirect ? `/register?redirect=${redirect}` : '/register'}>Sign Up</Link></small>
+            </span>
           </Card>
         </Col>
       {/* </Row> */}
