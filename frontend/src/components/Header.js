@@ -4,8 +4,11 @@ import { Avatar } from '@mui/material'
 import { LinkContainer } from 'react-router-bootstrap'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout } from '../actions/userActions'
+import { useNavigate } from 'react-router-dom'
 
 function Header() {
+
+    const navigate = useNavigate()
 
     const dispatch = useDispatch()
 
@@ -14,6 +17,8 @@ function Header() {
 
     const logoutHandler = () => {
         dispatch(logout())
+
+        navigate('/login')
     }
 
   return (
