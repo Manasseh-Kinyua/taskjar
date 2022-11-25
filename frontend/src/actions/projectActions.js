@@ -10,8 +10,12 @@ import {
     PROJECT_CREATE_REQUEST,
     PROJECT_CREATE_SUCCESS,
     PROJECT_CREATE_FAIL,
+
+    PROJECT_EDIT_REQUEST,
+    PROJECT_EDIT_SUCCESS,
+    PROJECT_EDIT_FAIL,
 } from '../constants/projectConstants'
-import { CREATE_PROJECT_ENDPOINT, GET_ALL_PROJECTS_ENDPOINT, GET_SINGLE_PROJECT_ENDPOINT } from '../constants/apiConstants'
+import { CREATE_PROJECT_ENDPOINT, EDIT_PROJECT_ENDPOINT, GET_ALL_PROJECTS_ENDPOINT, GET_SINGLE_PROJECT_ENDPOINT } from '../constants/apiConstants'
 import axios from 'axios'
 
 export const listProjects = () => async (dispatch) => {
@@ -85,6 +89,42 @@ export const createProject = () => async (dispatch, getState) => {
     } catch(error) {
         dispatch({
             type: PROJECT_CREATE_FAIL,
+            payload: error.response && error.response.data.detail
+                ? error.response.data.detail
+                : error.message
+        })
+    }
+}
+
+export const editProject = (project) => async (dispatch, getState) => {
+    try {
+        dispatch({type: PROJECT_EDIT_REQUEST})
+
+        const {
+            userLogin: {userInfo}
+        } = getState()
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
+
+        const {data} = await axios.put (
+            EDIT_PROJECT_ENDPOINT,
+            project,
+            config
+        )
+
+        dispatch({
+            type: PROJECT_EDIT_SUCCESS,
+            payload: data
+        })
+
+    } catch(error) {
+        dispatch({
+            type: PROJECT_EDIT_FAIL,
             payload: error.response && error.response.data.detail
                 ? error.response.data.detail
                 : error.message
