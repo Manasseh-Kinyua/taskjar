@@ -24,18 +24,19 @@ function HomeScreen() {
   const projectCreate = useSelector(state => state.projectCreate)
   const {loading: loadingCreateProject, error: errorCreateProject, success: successCreateProject, project} = projectCreate
 
+  const projectDelete = useSelector(state => state.projectDelete)
+  const {success: successDeleteProject} = projectDelete
+
   useEffect(() => {
     if(successCreateProject) {
       navigate(`/project/${project.id}/edit`)
       dispatch({type: PROJECT_CREATE_RESET})
     }
     dispatch(listProjects())
-  }, [dispatch, successCreateProject, navigate])
+  }, [dispatch, successCreateProject, navigate, successDeleteProject])
 
   const createProjectHandler = () => {
     dispatch(createProject())
-
-    // navigate(`/project/${project}`)
   }
 
   return (

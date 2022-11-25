@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Row, Col, Card } from 'react-bootstrap'
 import Avatar from '@mui/material/Avatar';
 import Badge from '@mui/material/Badge';
@@ -6,8 +6,26 @@ import Chip from '@mui/material/Chip';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { deleteProject } from '../actions/projectActions';
 
 function Project({project}) {
+
+  const dispatch = useDispatch()
+
+  const projectDelete = useSelector(state => state.projectDelete)
+  const {success} = projectDelete
+
+  useEffect(() => {
+    // if(success) {
+    //   dispatch()
+    // }
+  }, [success])
+
+  const deleteProjectHandler = (id) => {
+    dispatch(deleteProject(id))
+  }
+
   return (
       <Card className='card' >
         <Card.Body>
@@ -37,7 +55,10 @@ function Project({project}) {
           <Row className='py-1'>
             <div style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
               <Link to={`/project/${project.id}/edit`}><EditIcon /></Link>
-              <DeleteIcon />
+              <span
+                onClick={() => deleteProjectHandler(project.id)}
+                >
+                  <DeleteIcon /></span>
             </div>
           </Row>
           
