@@ -10,6 +10,7 @@ import {
     PROJECT_CREATE_REQUEST,
     PROJECT_CREATE_SUCCESS,
     PROJECT_CREATE_FAIL,
+    PROJECT_CREATE_RESET,
 
     PROJECT_EDIT_REQUEST,
     PROJECT_EDIT_SUCCESS,
@@ -77,6 +78,7 @@ export const projectCreateReducer = (state = {}, action) => {
         case PROJECT_CREATE_SUCCESS:
             return {
                 loading: false,
+                success: true,
                 project: action.payload
             }
 
@@ -85,6 +87,9 @@ export const projectCreateReducer = (state = {}, action) => {
                 loading: false,
                 error: action.payload
             }
+
+        case PROJECT_CREATE_RESET:
+            return {}
 
         default:
             return state

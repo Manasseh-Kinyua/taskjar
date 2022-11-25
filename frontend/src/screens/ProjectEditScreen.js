@@ -65,6 +65,8 @@ function ProjectEditScreen() {
               <strong>EDIT</strong>
             </span>
             <Form className='p-3' onSubmit={submitHandler}>
+              {loading && <Loader />}
+              {error && <Message variant='danger'>{error}</Message>}
               <Form.Group controlId='name'>
                 <Form.Label>Project Name</Form.Label>
                 <Form.Control

@@ -2,15 +2,18 @@ import React, { useEffect } from 'react'
 import { Row, Col, Button } from 'react-bootstrap'
 import Container from '@mui/material/Container';
 import { useDispatch, useSelector } from 'react-redux'
-import { listProjects } from '../actions/projectActions'
+import { createProject, listProjects } from '../actions/projectActions'
 import Project from '../components/Project'
 import Loader from '../components/Loader';
 import Message from '../components/Message';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { PROJECT_CREATE_RESET } from '../constants/projectConstants';
 
 function HomeScreen() {
 
   const dispatch = useDispatch()
+
+  const navigate = useNavigate()
 
   const projectList = useSelector(state => state.projectList)
   const {loading, error, projects} = projectList
@@ -18,9 +21,22 @@ function HomeScreen() {
   const userLogin = useSelector(state => state.userLogin)
   const {userInfo} = userLogin
 
+  const projectCreate = useSelector(state => state.projectCreate)
+  const {loading: loadingCreateProject, error: errorCreateProject, success: successCreateProject, project} = projectCreate
+
   useEffect(() => {
+    if(successCreateProject) {
+      navigate(`/project/${project.id}/edit`)
+      dispatch({type: PROJECT_CREATE_RESET})
+    }
     dispatch(listProjects())
-  }, [dispatch])
+  }, [dispatch, successCreateProject, navigate])
+
+  const createProjectHandler = () => {
+    dispatch(createProject())
+
+    // navigate(`/project/${project}`)
+  }
 
   return (
     <Container maxWidth="xl">
@@ -28,7 +44,12 @@ function HomeScreen() {
         <span style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
           <h5>PROJECTS</h5>
           {userInfo ? (
-            <Button className='btn-md' style={{backgroundColor:'#20c997'}}>Create Project</Button>
+            <Button
+              onClick={createProjectHandler}
+              className='btn-md' style={{backgroundColor:'#20c997'}}
+              >
+                Create Project
+            </Button>
           ) : (
             <Message variant='info'>Login to create project: <Link to='/login'> Login</Link></Message>
           )}
