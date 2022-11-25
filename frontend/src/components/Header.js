@@ -2,12 +2,19 @@ import React from 'react'
 import { Container, Navbar, Nav, Image, NavDropdown } from 'react-bootstrap'
 import { Avatar } from '@mui/material'
 import { LinkContainer } from 'react-router-bootstrap'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { logout } from '../actions/userActions'
 
 function Header() {
 
+    const dispatch = useDispatch()
+
     const userLogin = useSelector(state => state.userLogin)
     const {userInfo} = userLogin
+
+    const logoutHandler = () => {
+        dispatch(logout())
+    }
 
   return (
     <header  className='fixed-nav '>
@@ -25,13 +32,13 @@ function Header() {
                                 <div style={{display: 'flex'}}>
                                     <Avatar alt="Remy Sharp" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFNkJpg5tIB3DZsMqxgGCyRtSwDuav9LEdbZI06evMasI6tmkPahgI1ftvuA7qbHSsbgg&usqp=CAU" />
                                     <NavDropdown
-                                    title={userInfo.name}
-                                    id='username'>
-                                        <LinkContainer
-                                            to='/profile'>
-                                                <NavDropdown.Item>Profile</NavDropdown.Item>
-                                        </LinkContainer>
-                                        <NavDropdown.Item >Logout</NavDropdown.Item>
+                                        title={userInfo.name}
+                                        id='username'>
+                                            <LinkContainer
+                                                to='/profile'>
+                                                    <NavDropdown.Item>Profile</NavDropdown.Item>
+                                            </LinkContainer>
+                                            <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
                                     </NavDropdown>
                               </div>
                             ) : (
