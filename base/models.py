@@ -19,6 +19,7 @@ class Task(models.Model):
     project = models.ForeignKey(Project, on_delete=models.SET_NULL, null=True)
     name = models.CharField(max_length=250)
     type = models.CharField(max_length=250)
+    urgency = models.CharField(max_length=250)
     status = models.CharField(max_length=250, blank=True)
     description = models.TextField(null=True, blank=True)
     createdAt = models.DateTimeField(auto_now_add=True)
