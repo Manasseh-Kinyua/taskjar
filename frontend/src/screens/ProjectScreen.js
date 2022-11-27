@@ -105,7 +105,7 @@ function ProjectScreen() {
 
             <Col md={2}>
               <Card style={{padding:'1rem'}}>
-                <Link to={`/project/${project.id}/tasks?name=${project.name}`}><Button style={{backgroundColor:'#20c997'}}>View Tasks</Button></Link>
+                <Link to={`/project/${project.id}/tasks?name=${project.name}`}><Button style={{backgroundColor:'#20c997'}}>View Task Board</Button></Link>
               </Card>
             </Col>
         </Row>

@@ -5,10 +5,10 @@ import Footer from "./components/Footer";
 
 import HomeScreen from './screens/HomeScreen';
 import ProjectScreen from './screens/ProjectScreen';
-import TaskListScreen from './screens/TaskListScreen';
 import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import ProjectEditScreen from './screens/ProjectEditScreen';
+import TaskBoardScreen from './screens/TaskBoardScreen';
 
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
           <Routes>
             <Route path='/' element={ <HomeScreen /> } />
             <Route path='/project/:id' element={ <ProjectScreen /> } />
-            <Route path='/project/:id/tasks' element={ <TaskListScreen /> } />
+            <Route path='/project/:id/tasks' element={ <TaskBoardScreen /> } />
             <Route path='/login' element={ <LoginScreen /> } />
             <Route path='/register' element={ <RegisterScreen /> } />
             <Route path='/project/:id/edit' element={ <ProjectEditScreen /> } />
