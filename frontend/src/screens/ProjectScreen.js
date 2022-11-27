@@ -100,7 +100,7 @@ function ProjectScreen() {
                       </ListGroup.Item>
                     </ListGroup>
                   ))}
-              </Card>
+              </Card>type
             </Col>
 
             <Col md={2}>
