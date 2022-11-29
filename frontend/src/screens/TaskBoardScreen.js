@@ -48,7 +48,7 @@ function TaskBoardScreen() {
       <Container>
         <div style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
           <h1>Task Board</h1>
-          <Link to={`/project/${params.id}/tasks`}>Manage Tasks</Link>
+          <Link to={`/project/${params.id}/tasks?name=${project.name}`}>Manage Tasks</Link>
         </div>
         {loading ? (
           <Loader />

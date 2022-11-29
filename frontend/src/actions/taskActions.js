@@ -17,7 +17,7 @@ export const listTasks = (id) => async (dispatch, getState) => {
         const config = {
             headers: {
                 'Content-Type': 'application/json',
-                Authirization: `Bearer ${userInfo.token}`
+                Authorization: `Bearer ${userInfo.token}`
             }
         }
 
