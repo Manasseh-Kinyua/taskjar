@@ -38,7 +38,6 @@ function TaskBoardScreen() {
   const projectDetails = useSelector(state => state.projectDetails)
   const {error, loading, project} = projectDetails
   const tasks = project.tasks
-  console.log(tasks)
 
   useEffect(() => {
     dispatch(listProjectDetails(params.id))
@@ -47,7 +46,10 @@ function TaskBoardScreen() {
   return (
     <div>
       <Container>
-        <h1>Task Board</h1>
+        <div style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
+          <h1>Task Board</h1>
+          <Link to={`/project/${params.id}/tasks`}>Manage Tasks</Link>
+        </div>
         {loading ? (
           <Loader />
         ) : error ? (
@@ -72,50 +74,53 @@ function TaskBoardScreen() {
               </Col>
             </Row>
 
-            <Card className='my-2'>
-              <ListGroup>
-                <ListGroup.Item>
-                  <Row>
-                    <Col>
-                      <PieChart width={400} height={400}>
-                        <Pie
-                          data={data}
-                          cx="50%"
-                          cy="50%"
-                          labelLine={false}
-                          label={renderCustomizedLabel}
-                          outerRadius={80}
-                          fill="#8884d8"
-                          dataKey="value"
-                          >
-                            {tasks.map((entry, index) => (
-                              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                            ))}
-                        </Pie>
-                      </PieChart>
-                    </Col>
-                    <Col>
-                      <PieChart width={400} height={400}>
-                        <Pie
-                          data={data}
-                          cx="50%"
-                          cy="50%"
-                          labelLine={false}
-                          label={renderCustomizedLabel}
-                          outerRadius={80}
-                          fill="#8884d8"
-                          dataKey="value"
-                          >
-                            {data.map((entry, index) => (
-                              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                            ))}
-                        </Pie>
-                      </PieChart>
-                    </Col>
-                  </Row>
-                </ListGroup.Item>
-              </ListGroup>
-            </Card>
+            <Row className='my-3'>
+              <h5>Bugs and Features</h5>
+              <Card className='my-2 p-0'>
+                <ListGroup>
+                  <ListGroup.Item>
+                    <Row>
+                      <Col>
+                        <PieChart width={400} height={400}>
+                          <Pie
+                            data={data}
+                            cx="50%"
+                            cy="50%"
+                            labelLine={false}
+                            label={renderCustomizedLabel}
+                            outerRadius={80}
+                            fill="#8884d8"
+                            dataKey="value"
+                            >
+                              {data.map((entry, index) => (
+                                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                              ))}
+                          </Pie>
+                        </PieChart>
+                      </Col>
+                      <Col>
+                        <PieChart width={400} height={400}>
+                          <Pie
+                            data={data}
+                            cx="50%"
+                            cy="50%"
+                            labelLine={false}
+                            label={renderCustomizedLabel}
+                            outerRadius={80}
+                            fill="#8884d8"
+                            dataKey="value"
+                            >
+                              {data.map((entry, index) => (
+                                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                              ))}
+                          </Pie>
+                        </PieChart>
+                      </Col>
+                    </Row>
+                  </ListGroup.Item>
+                </ListGroup>
+              </Card>
+            </Row>
           </div>
         )}
       </Container>

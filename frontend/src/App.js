@@ -9,6 +9,7 @@ import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import ProjectEditScreen from './screens/ProjectEditScreen';
 import TaskBoardScreen from './screens/TaskBoardScreen';
+import TaskListScreen from './screens/TaskListScreen';
 
 function App() {
   return (
@@ -19,10 +20,11 @@ function App() {
           <Routes>
             <Route path='/' element={ <HomeScreen /> } />
             <Route path='/project/:id' element={ <ProjectScreen /> } />
-            <Route path='/project/:id/tasks' element={ <TaskBoardScreen /> } />
+            <Route path='/project/:id/taskboard' element={ <TaskBoardScreen /> } />
             <Route path='/login' element={ <LoginScreen /> } />
             <Route path='/register' element={ <RegisterScreen /> } />
             <Route path='/project/:id/edit' element={ <ProjectEditScreen /> } />
+            <Route path='/project/:id/tasks' element={ <TaskListScreen /> } />
           </Routes>
         </main>
         <Footer />
