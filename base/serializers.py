@@ -31,10 +31,34 @@ class UserSerializerWithToken(UserSerializer):
         token = RefreshToken.for_user(obj)
         return str(token.access_token)
 
+class ProjectSerializerForTask(serializers.ModelSerializer):
+    class Meta:
+        model = Project
+        fields = ['name']
+
 class TaskSerializer(serializers.ModelSerializer):
+    creator = serializers.SerializerMethodField(read_only=True)
+    handler = serializers.SerializerMethodField(read_only=True)
+    project = serializers.SerializerMethodField(read_only=True)
+
     class Meta:
         model = Task
         fields = '__all__'
+
+    def get_creator(self, obj):
+        creator = obj.creator
+        serializer = UserSerializer(creator, many=False)
+        return serializer.data
+
+    def get_handler(self, obj):
+        handler = obj.handler
+        serializer = UserSerializer(handler, many=False)
+        return serializer.data
+
+    def get_project(self, obj):
+        project = obj.project
+        serializer = ProjectSerializerForTask(project, many=False)
+        return serializer.data
 
 class ProjectSerializer(serializers.ModelSerializer):
     tasks = serializers.SerializerMethodField(read_only=True)
