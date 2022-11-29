@@ -1,14 +1,35 @@
 import React, { useEffect } from 'react'
 import Container from '@mui/material/Container';
-import { Row, Col, Card } from 'react-bootstrap'
+import { Row, Col, Card, ListGroup } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { listProjectDetails } from '../actions/projectActions';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { PieChart, Pie, Sector } from 'recharts';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 
 function TaskBoardScreen() {
+
+  const data = [
+    { name: 'Group A', value: 400 },
+    { name: 'Group B', value: 300 },
+    { name: 'Group C', value: 300 },
+    { name: 'Group D', value: 200 },
+  ];
+  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+  const RADIAN = Math.PI / 180;
+  const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
+    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+  
+    return (
+      <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
+        {`${(percent * 100).toFixed(0)}%`}
+      </text>
+    );
+  };
 
   const params = useParams()
 
@@ -18,21 +39,6 @@ function TaskBoardScreen() {
   const {error, loading, project} = projectDetails
   const tasks = project.tasks
   console.log(tasks)
-  let taskUrgency = 0
-  for(let task in tasks){
-    console.log("Task ",task.name)
-    let urgency = task
-    console.log("Task urgency ",urgency)
-    // if(task.urgency == 'not urgent'){
-    //   const taskUrgency = 0
-    // }else if(task.urgency == 'urgent'){
-    //   const taskUrgency = 1
-    // }else{
-    //   const taskUrgency = 2
-    // }
-    // return taskUrgency
-  }
-  console.log(taskUrgency)
 
   useEffect(() => {
     dispatch(listProjectDetails(params.id))
@@ -47,33 +53,70 @@ function TaskBoardScreen() {
         ) : error ? (
           <Message variant='danger'>{error}</Message>
         ) : (
-          <Row>
-            <Col md={6}>
-              <Card>
-                <LineChart
-                  width={500}
-                  height={300}
-                  data={tasks}
-                  margin={{
-                    top: 5,
-                    right: 30,
-                    left: 20,
-                    bottom: 5,
-                  }}
-                  >
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="id" />
+          <div>
+            <Row>
+              <h5>Task Progress</h5>
+              <Col sm={12} md={12}>
+                <Card>
+                <ListGroup>
+                <ListGroup.Item>
+                  <BarChart width={500} height={250} data={tasks}>
+                    <Bar dataKey="status" fill="purple" />
+                    <XAxis dataKey='id'/>
                     <YAxis />
                     <Tooltip />
-                    <Legend />
-                    {tasks && tasks.map(task => (
-                      <Line key={task.id} type="monotone" dataKey="type" stroke="#8884d8" activeDot={{ r: 8 }} />
-                      // <Line type="monotone" dataKey="status" stroke="#82ca9d" />
-                    ))}
-                </LineChart>
-              </Card>
-            </Col>
-          </Row>
+                  </BarChart>
+                </ListGroup.Item>
+                </ListGroup>
+                </Card>
+              </Col>
+            </Row>
+
+            <Card className='my-2'>
+              <ListGroup>
+                <ListGroup.Item>
+                  <Row>
+                    <Col>
+                      <PieChart width={400} height={400}>
+                        <Pie
+                          data={data}
+                          cx="50%"
+                          cy="50%"
+                          labelLine={false}
+                          label={renderCustomizedLabel}
+                          outerRadius={80}
+                          fill="#8884d8"
+                          dataKey="value"
+                          >
+                            {tasks.map((entry, index) => (
+                              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                            ))}
+                        </Pie>
+                      </PieChart>
+                    </Col>
+                    <Col>
+                      <PieChart width={400} height={400}>
+                        <Pie
+                          data={data}
+                          cx="50%"
+                          cy="50%"
+                          labelLine={false}
+                          label={renderCustomizedLabel}
+                          outerRadius={80}
+                          fill="#8884d8"
+                          dataKey="value"
+                          >
+                            {data.map((entry, index) => (
+                              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                            ))}
+                        </Pie>
+                      </PieChart>
+                    </Col>
+                  </Row>
+                </ListGroup.Item>
+              </ListGroup>
+            </Card>
+          </div>
         )}
       </Container>
     </div>
