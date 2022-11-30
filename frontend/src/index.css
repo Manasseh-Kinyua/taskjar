@@ -40,12 +40,12 @@ main {
     border: none;
 } */
 
-/* .card:hover {
+.card:hover {
     border: none;
     -webkit-box-shadow: 4px 3px 5px 0px lightgray;
     -moz-box-shadow: 4px 3px 5px 0px lightgray;
-    box-shadow: 4px 3px 5px 0px rgb(24, 22, 24);
-} */
+    box-shadow: 4px 3px 5px 0px rgb(253, 252, 253);
+}
 
 .blue-bg {
     background-color: blue;
