@@ -12,3 +12,24 @@ def getProjectTasks(request, pk):
     tasks = project.task_set.all()
     serializer = TaskSerializer(tasks, many=True)
     return Response(serializer.data)
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def createTask(request):
+    creator = request.user
+    data = request.data
+    project_id = data['project_id']
+    project = Project.objects.get(id=project_id)
+
+    task = Task.objects.create(
+        creator=creator,
+        project=project,
+        name=data['name'],
+        type=data['type'],
+        urgency=data['urgency'],
+        status=0,
+        description=data['description']
+    )
+    serializer = TaskSerializer(task, many=False)
+
+    return Response(serializer.data)
