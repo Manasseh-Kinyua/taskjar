@@ -6,6 +6,7 @@ import Chip from '@mui/material/Chip';
 import { Row, Col, Card, ListGroup } from 'react-bootstrap'
 import { listTasks } from '../actions/taskActions'
 import Message from '../components/Message';
+import Loader from '../components/Loader';
 
 function TaskListScreen() {
 
@@ -29,7 +30,10 @@ function TaskListScreen() {
     <div>
       <Container maxWidth="xxl">
         <h5>{projectName} tasks</h5>
+        {loading && <Loader />}
+        {error && <Message variant="error">{error}</Message>}
         <Row>
+          
           <Col md={3}>
             <ListGroup style={{padding:'none', borderRadius:'0', minHeight:'80vh'}}>
               <ListGroup.Item style={{padding:'0'}}>
