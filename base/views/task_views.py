@@ -68,6 +68,17 @@ def updateTaskToInProgress(request, pk):
 
     return Response(serializer.data)
 
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def updateTaskToDone(request, pk):
+    task = Task.objects.get(id=pk)
+
+    task.status = 3
+    task.save()
+    serializer = TaskSerializer(task, many=False)
+
+    return Response(serializer.data)
+
 @api_view(['DELETE'])
 @permission_classes([IsAuthenticated])
 def deleteTask(request, pk):

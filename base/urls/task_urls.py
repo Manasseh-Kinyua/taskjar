@@ -6,6 +6,7 @@ urlpatterns = [
     path('<str:pk>/', views.getSingleTask, name='single-task'),
     path('edit/<str:pk>/', views.editTask, name='edit-task'),
     path('update/to-in-progress/<str:pk>/', views.editTask, name='edit-task'),
+    path('update/to-done/<str:pk>/', views.editTask, name='edit-task'),
     path('delete/<str:pk>/', views.deleteTask, name='delete-task'),
     path('create/', views.createTask, name='create-task'),
 ]
