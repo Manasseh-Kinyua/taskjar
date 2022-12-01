@@ -41,6 +41,24 @@ def createTask(request):
 
     return Response(serializer.data)
 
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def editTask(request, pk):
+    data = request.data
+    task = Task.objects.get(id=pk)
+
+    task.name=data['name'],
+    task.type=data['type'],
+    task.urgency=data['urgency'],
+    task.description=data['description']
+
+    task.save()
+    serializer = TaskSerializer(task, many=False)
+
+    return Response(serializer.data)
+
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
 def deleteTask(request, pk):
     task = Task.objects.get(id=pk)
     task.delete()
