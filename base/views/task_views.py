@@ -40,3 +40,8 @@ def createTask(request):
     serializer = TaskSerializer(task, many=False)
 
     return Response(serializer.data)
+
+def deleteTask(request, pk):
+    task = Task.objects.get(id=pk)
+    task.delete()
+    return Response('Task was Deleted')
