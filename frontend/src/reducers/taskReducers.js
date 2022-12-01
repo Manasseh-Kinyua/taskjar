@@ -6,6 +6,10 @@ import {
     CREATE_TASK_REQUEST,
     CREATE_TASK_SUCCESS,
     CREATE_TASK_FAIL,
+
+    DELETE_TASK_REQUEST,
+    DELETE_TASK_SUCCESS,
+    DELETE_TASK_FAIL,
 } from "../constants/taskConstants";
 
 export const taskListReducer = (state = {tasks:[]}, action) => {
@@ -48,6 +52,30 @@ export const taskCreateReducer = (state = {}, action) => {
             }
 
         case CREATE_TASK_FAIL:
+            return {
+                loading: false,
+                error: action.payload
+            }
+
+        default:
+            return state
+    }
+}
+
+export const taskDeleteReducer = (state = {}, action) => {
+    switch(action.type) {
+        case DELETE_TASK_REQUEST:
+            return {
+                loading: true
+            }
+
+        case DELETE_TASK_SUCCESS:
+            return {
+                loading: false,
+                success: true,
+            }
+
+        case DELETE_TASK_FAIL:
             return {
                 loading: false,
                 error: action.payload

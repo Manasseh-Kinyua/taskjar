@@ -9,6 +9,7 @@ export const DELETE_PROJECT_ENDPOINT = `${BASE_URL}projects/delete/`
 
 export const GET_PROJECT_TASKS_ENDPOINT = `${BASE_URL}tasks/for-project/`
 export const CREATE_TASK_ENDPOINT = `${BASE_URL}tasks/create/`
+export const DELETE_TASK_ENDPOINT = `${BASE_URL}tasks/delete/`
 
 export const USER_REGISTER_ENDPOINT = `${BASE_URL}users/register/`
 export const USER_LOGIN_ENDPOINT = `${BASE_URL}users/login/`
