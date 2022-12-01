@@ -4,7 +4,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 
 import { projectCreateReducer, projectDeleteReducer, projectDetailsReducer, projectEditReducer, projectListReducer } from './reducers/projectReducers'
 import { userLoginReducer, userRegisterReducer } from './reducers/userReducers'
-import { taskListReducer } from './reducers/taskReducers'
+import { createTaskReducer, taskListReducer } from './reducers/taskReducers'
 
 const reducer = combineReducers({
     projectList: projectListReducer,
@@ -17,6 +17,7 @@ const reducer = combineReducers({
     userLogin: userLoginReducer,
 
     taskList: taskListReducer,
+    createTask: createTaskReducer,
 })
 
 const userInfoFromStorage = localStorage.getItem('userInfo') ?
