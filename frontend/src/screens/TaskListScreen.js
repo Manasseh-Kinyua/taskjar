@@ -1,14 +1,19 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams, useLocation, Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Container from '@mui/material/Container';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Chip from '@mui/material/Chip';
 import { Row, Col, Card, ListGroup, Button } from 'react-bootstrap'
-import { listTasks } from '../actions/taskActions'
+import { Menu, MenuItem } from '@mui/material';
+import { deleteTask, listTasks } from '../actions/taskActions'
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 
 function TaskListScreen() {
+
+    const [anchorEl, setAnchorEl] = useState(null)
+    const open = Boolean(anchorEl)
 
     const params = useParams()
 
@@ -20,11 +25,27 @@ function TaskListScreen() {
 
     const taskList = useSelector(state => state.taskList)
     const {loading, error, tasks} = taskList
-    console.log(tasks)
+
+    const taskDelete = useSelector(state => state.taskDelete)
+    const {loading: loadingDeleteTask, error: errorDeleteTask, success: successDeleteTask} = taskDelete
 
     useEffect(() => {
       dispatch(listTasks(params.id))
-    }, [dispatch, params.id])
+    }, [dispatch, params.id, successDeleteTask])
+
+    const handleClick = (event) => {
+      setAnchorEl(event.currentTarget)
+    }
+
+    const handleClose = () => {
+      setAnchorEl(null)
+    }
+
+    const deleteTaskHandler = (id) => {
+      if(window.confirm("Are you sure you want to delete these task?")) {
+        dispatch(deleteTask(id))
+      }
+    }
 
   return (
     <div>
@@ -43,26 +64,52 @@ function TaskListScreen() {
                 <h6 style={{padding:'1rem', backgroundColor:'lightpink'}}>UNASSIGNED</h6>
                 {tasks.map(task => (
                   task.status === 0 && (
-                    <Link key={task.id} style={{textDecoration:'none'}}  to={`/task/${task.id}`}>
+                    <div key={task.id}>
                       <Card className='p-1 m-1'>
-                        <h6>{task.name}</h6>
-                        <span style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
-                          {task.urgeny == 'not urgent' ? (
-                            <Chip label={task.urgency} color='success' />
-                          ) : task.urgency == 'urgent' ? (
-                            <Chip label={task.urgency} color='primary' />
-                          ) : (
-                            <Chip label={task.urgency} color='warning' />
-                          )}
-                          {task.type == 'bug' ? (
-                            <Chip label={task.type} color="error" />
-                          ) : (
-                            <Chip label={task.type} color="success" />
-                          )}
+                        <span className='py-2' style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
+                          <Link to={`/task/${task.id}`}><h6>{task.name}</h6></Link>
+                          <MoreVertIcon id='task-actions-toggle' onClick={handleClick} aria-controls={open ? 'task-actions' : undefined} aria-haspopup='true' aria-expanded={open ? 'true' : undefined} />
+                          <Menu
+                            elevation={0}
+                            id='task-actions'
+                            anchorEl={anchorEl}
+                            open={open}
+                            MenuListProps={{
+                              'aria-labelledby': 'task-actions-toggle'
+                            }}
+                            onClose={handleClose}
+                            anchorOrigin={{
+                              vertical:'bottom',
+                              horizontal:'right'
+                            }}
+                            transformOrigin={{
+                              vertical:'top',
+                              horizontal:'right'
+                            }}
+                            >
+                              <MenuItem onClick={() => deleteTaskHandler(task.id)}>Delete</MenuItem>
+                              <MenuItem>Task</MenuItem>
+                          </Menu>
                         </span>
+                        <Link to={`/task/${task.id}`} style={{textDecoration:'none'}}>
+                          <span style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
+                            {task.urgeny == 'not urgent' ? (
+                              <Chip label={task.urgency} color='success' />
+                            ) : task.urgency == 'urgent' ? (
+                              <Chip label={task.urgency} color='primary' />
+                            ) : (
+                              <Chip label={task.urgency} color='warning' />
+                            )}
+                            {task.type == 'bug' ? (
+                              <Chip label={task.type} color="error" />
+                            ) : (
+                              <Chip label={task.type} color="success" />
+                            )}
+                          </span>
+                        </Link>
                         <span className='py-2' style={{textAlign:'right',}}><Chip label="Not Assigned" color="secondary" /></span>
                       </Card>
-                    </Link>
+                    </div>
                   ) 
                 ))}
               </ListGroup.Item>
@@ -76,7 +123,10 @@ function TaskListScreen() {
                   task.status === 1 && (
                     <Link key={task.id} style={{textDecoration:'none'}}  to={`/task/${task.id}`}>
                       <Card className='p-1 m-1'>
-                        <h6>{task.name}</h6>
+                        <span className='py-2' style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
+                          <h6>{task.name}</h6>
+                          <MoreVertIcon />
+                        </span>
                         <span style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
                           {task.urgeny == 'not urgent' ? (
                             <Chip label={task.urgency} color='success' />
@@ -107,7 +157,10 @@ function TaskListScreen() {
                   task.status === 2 && (
                     <Link key={task.id} style={{textDecoration:'none'}}  to={`/task/${task.id}`}>
                       <Card className='p-1 m-1'>
-                        <h6>{task.name}</h6>
+                        <span className='py-2' style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
+                          <h6>{task.name}</h6>
+                          <MoreVertIcon />
+                        </span>
                         <span style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
                           {task.urgeny == 'not urgent' ? (
                             <Chip label={task.urgency} color='success' />
@@ -138,7 +191,10 @@ function TaskListScreen() {
                   task.status === 3 && (
                     <Link key={task.id} style={{textDecoration:'none'}}  to={`/task/${task.id}`}>
                       <Card className='p-1 m-1'>
-                        <h6>{task.name}</h6>
+                        <span className='py-2' style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
+                          <h6>{task.name}</h6>
+                          <MoreVertIcon />
+                        </span>
                         <span style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
                           {task.urgeny == 'not urgent' ? (
                             <Chip label={task.urgency} color='success' />
