@@ -5,6 +5,7 @@ import Container from '@mui/material/Container';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Chip from '@mui/material/Chip';
 import { Row, Col, Card, ListGroup, Button } from 'react-bootstrap'
+import Dropdown from 'react-bootstrap/Dropdown';
 import { Menu, MenuItem } from '@mui/material';
 import { deleteTask, listTasks } from '../actions/taskActions'
 import Message from '../components/Message';
@@ -12,8 +13,8 @@ import Loader from '../components/Loader';
 
 function TaskListScreen() {
 
-    const [anchorEl, setAnchorEl] = useState(null)
-    const open = Boolean(anchorEl)
+    // const [anchorEl, setAnchorEl] = useState(null)
+    // const open = Boolean(anchorEl)
 
     const params = useParams()
 
@@ -33,13 +34,13 @@ function TaskListScreen() {
       dispatch(listTasks(params.id))
     }, [dispatch, params.id, successDeleteTask])
 
-    const handleClick = (event) => {
-      setAnchorEl(event.currentTarget)
-    }
+    // const handleClick = (event) => {
+    //   setAnchorEl(event.currentTarget)
+    // }
 
-    const handleClose = () => {
-      setAnchorEl(null)
-    }
+    // const handleClose = () => {
+    //   setAnchorEl(null)
+    // }
 
     const deleteTaskHandler = (id) => {
       if(window.confirm("Are you sure you want to delete these task?")) {
@@ -68,7 +69,7 @@ function TaskListScreen() {
                       <Card className='p-1 m-1'>
                         <span className='py-2' style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
                           <Link to={`/task/${task.id}`}><h6>{task.name}</h6></Link>
-                          <MoreVertIcon id='task-actions-toggle' onClick={handleClick} aria-controls={open ? 'task-actions' : undefined} aria-haspopup='true' aria-expanded={open ? 'true' : undefined} />
+                          {/* <MoreVertIcon id='task-actions-toggle' onClick={handleClick} aria-controls={open ? 'task-actions' : undefined} aria-haspopup='true' aria-expanded={open ? 'true' : undefined} />
                           <Menu
                             elevation={0}
                             id='task-actions'
@@ -89,7 +90,17 @@ function TaskListScreen() {
                             >
                               <MenuItem onClick={() => deleteTaskHandler(task.id)}>Delete</MenuItem>
                               <MenuItem>Task</MenuItem>
-                          </Menu>
+                          </Menu> */}
+                          <Dropdown>
+                            <Dropdown.Toggle style={{background:'none', border:'none'}} >
+                              <MoreVertIcon />
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu style={{background:'rgb(208, 41, 208)', width:'2%'}}>
+                              <Dropdown.Item onClick={() => deleteTaskHandler(task.id)}>Delete</Dropdown.Item>
+                              <Dropdown.Item>Edit</Dropdown.Item>
+                            </Dropdown.Menu>
+                          </Dropdown>
                         </span>
                         <Link to={`/task/${task.id}`} style={{textDecoration:'none'}}>
                           <span style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
