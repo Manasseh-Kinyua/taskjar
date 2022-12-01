@@ -33,7 +33,7 @@ export const taskListReducer = (state = {tasks:[]}, action) => {
     }
 }
 
-export const createTaskReducer = (state = {}, action) => {
+export const taskCreateReducer = (state = {}, action) => {
     switch(action.type) {
         case CREATE_TASK_REQUEST:
             return {
@@ -43,6 +43,7 @@ export const createTaskReducer = (state = {}, action) => {
         case CREATE_TASK_SUCCESS:
             return {
                 loading: false,
+                success: true,
                 task: action.payload
             }
 

@@ -31,7 +31,7 @@ function TaskListScreen() {
       <Container maxWidth="xxl">
         <div className='py-2' style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
           <h5>{projectName} tasks</h5>
-          <Link to={`/project/${params.id}/tasks/create?name=${projectName}`}><Button>Add a Task</Button></Link>
+          <Link to={`/project/${params.id}/tasks/create?name=${projectName}`}><Button className='btn-md' style={{backgroundColor:'#20c997'}}>Add a Task</Button></Link>
         </div>
         {loading && <Loader />}
         {error && <Message variant="error">{error}</Message>}

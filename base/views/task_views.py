@@ -13,6 +13,13 @@ def getProjectTasks(request, pk):
     serializer = TaskSerializer(tasks, many=True)
     return Response(serializer.data)
 
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def getSingleTask(request, pk):
+    task = Task.objects.get(id=pk)
+    serializer = TaskSerializer(task, many=False)
+    return Response(serializer.data)
+
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def createTask(request):

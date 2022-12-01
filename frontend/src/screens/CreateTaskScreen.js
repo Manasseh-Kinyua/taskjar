@@ -29,11 +29,18 @@ function CreateTaskScreen() {
     const userLogin = useSelector(state => state.userLogin)
     const {loading, error, userInfo} = userLogin
 
+    const taskCreate = useSelector(state => state.taskCreate)
+    const {loading: loadingCreateTask, error: errorCreateTask, success: successCreateTask} = taskCreate
+
     useEffect(() => {
       if(!userInfo) {
         navigate('/login')
       }
-    }, [navigate, userInfo])
+
+      if(successCreateTask) {
+        navigate(`/project/${params.id}/tasks?name=${projectName}`)
+      }
+    }, [navigate, userInfo, successCreateTask])
 
     const submitHandler = (e) => {
         e.preventDefault()
@@ -42,8 +49,6 @@ function CreateTaskScreen() {
             project_id: params.id,
             name, type, urgency, description
         }))
-
-        navigate(`/project/${params.id}/tasks?name=${projectName}`)
     }
 
   return (
@@ -55,14 +60,14 @@ function CreateTaskScreen() {
               <strong>CREATE TASK</strong>
             </span>
             <Form className='p-3' onSubmit={submitHandler}>
-              {loading && <Loader />}
-              {error && <Message variant='danger'>{error}</Message>}
+              {loadingCreateTask && <Loader />}
+              {errorCreateTask && <Message variant='danger'>{errorCreateTask}</Message>}
               <Form.Group controlId='name'>
                 <Form.Label>Name</Form.Label>
                 <Form.Control
                   required
                   type='text'
-                  placeholder='Enter project name'
+                  placeholder='Enter task name'
                   value={name}
                   onChange={(e) => setName(e.target.value)}>
 
