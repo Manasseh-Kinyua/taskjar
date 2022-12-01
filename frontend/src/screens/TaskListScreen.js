@@ -3,7 +3,7 @@ import { useParams, useLocation, Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Container from '@mui/material/Container';
 import Chip from '@mui/material/Chip';
-import { Row, Col, Card, ListGroup } from 'react-bootstrap'
+import { Row, Col, Card, ListGroup, Button } from 'react-bootstrap'
 import { listTasks } from '../actions/taskActions'
 import Message from '../components/Message';
 import Loader from '../components/Loader';
@@ -29,7 +29,10 @@ function TaskListScreen() {
   return (
     <div>
       <Container maxWidth="xxl">
-        <h5>{projectName} tasks</h5>
+        <div className='py-2' style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
+          <h5>{projectName} tasks</h5>
+          <Link to={`/project/${params.id}/tasks/create?name=${projectName}`}><Button>Add a Task</Button></Link>
+        </div>
         {loading && <Loader />}
         {error && <Message variant="error">{error}</Message>}
         <Row>
