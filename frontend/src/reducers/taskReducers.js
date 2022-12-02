@@ -11,6 +11,10 @@ import {
     CREATE_TASK_SUCCESS,
     CREATE_TASK_FAIL,
 
+    CREATE_TASK_MESSAGE_REQUEST,
+    CREATE_TASK_MESSAGE_SUCCESS,
+    CREATE_TASK_MESSAGE_FAIL,
+
     DELETE_TASK_REQUEST,
     DELETE_TASK_SUCCESS,
     DELETE_TASK_FAIL,
@@ -81,6 +85,31 @@ export const taskCreateReducer = (state = {}, action) => {
             }
 
         case CREATE_TASK_FAIL:
+            return {
+                loading: false,
+                error: action.payload
+            }
+
+        default:
+            return state
+    }
+}
+
+export const taskCreateMessageReducer = (state = {}, action) => {
+    switch(action.type) {
+        case CREATE_TASK_MESSAGE_REQUEST:
+            return {
+                loading: true
+            }
+
+        case CREATE_TASK_MESSAGE_SUCCESS:
+            return {
+                loading: false,
+                success: true,
+                message: action.payload
+            }
+
+        case CREATE_TASK_MESSAGE_FAIL:
             return {
                 loading: false,
                 error: action.payload
