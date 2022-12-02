@@ -13,10 +13,8 @@ import Loader from '../components/Loader';
 
 function TaskListScreen() {
 
-    // const [anchorEl, setAnchorEl] = useState(null)
-    // const open = Boolean(anchorEl)
-
     const params = useParams()
+    const projectId = params.id
 
     const location = useLocation()
     const searchParams = new URLSearchParams(location.search)
@@ -33,14 +31,6 @@ function TaskListScreen() {
     useEffect(() => {
       dispatch(listTasks(params.id))
     }, [dispatch, params.id, successDeleteTask])
-
-    // const handleClick = (event) => {
-    //   setAnchorEl(event.currentTarget)
-    // }
-
-    // const handleClose = () => {
-    //   setAnchorEl(null)
-    // }
 
     const deleteTaskHandler = (id) => {
       if(window.confirm("Are you sure you want to delete these task?")) {
@@ -63,34 +53,12 @@ function TaskListScreen() {
             <ListGroup style={{padding:'none', borderRadius:'0', minHeight:'80vh'}}>
               <ListGroup.Item style={{padding:'0'}}>
                 <h6 style={{padding:'1rem', backgroundColor:'lightpink'}}>UNASSIGNED</h6>
-                {tasks.map(task => (
+                {tasks && tasks.map(task => (
                   task.status === 0 && (
                     <div key={task.id}>
                       <Card className='p-1 m-1'>
                         <span className='py-2' style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
-                          <Link to={`/task/${task.id}`}><h6>{task.name}</h6></Link>
-                          {/* <MoreVertIcon id='task-actions-toggle' onClick={handleClick} aria-controls={open ? 'task-actions' : undefined} aria-haspopup='true' aria-expanded={open ? 'true' : undefined} />
-                          <Menu
-                            elevation={0}
-                            id='task-actions'
-                            anchorEl={anchorEl}
-                            open={open}
-                            MenuListProps={{
-                              'aria-labelledby': 'task-actions-toggle'
-                            }}
-                            onClose={handleClose}
-                            anchorOrigin={{
-                              vertical:'bottom',
-                              horizontal:'right'
-                            }}
-                            transformOrigin={{
-                              vertical:'top',
-                              horizontal:'right'
-                            }}
-                            >
-                              <MenuItem onClick={() => deleteTaskHandler(task.id)}>Delete</MenuItem>
-                              <MenuItem>Task</MenuItem>
-                          </Menu> */}
+                          <Link to={`/task/${task.id}?p-id=${projectId}&p-name=${projectName}`}><h6>{task.name}</h6></Link>
                           <Dropdown>
                             <Dropdown.Toggle style={{background:'none', border:'none'}} >
                               <MoreVertIcon />
@@ -130,7 +98,7 @@ function TaskListScreen() {
             <ListGroup style={{padding:'none', borderRadius:'0', minHeight:'80vh'}}>
               <ListGroup.Item style={{padding:'0'}}>
                 <h6 style={{padding:'1rem', backgroundColor:'lightblue'}}>ASSIGNED</h6>
-                {tasks.map(task => (
+                {tasks && tasks.map(task => (
                   task.status === 1 && (
                     <Link key={task.id} style={{textDecoration:'none'}}  to={`/task/${task.id}`}>
                       <Card className='p-1 m-1'>
@@ -164,7 +132,7 @@ function TaskListScreen() {
             <ListGroup style={{padding:'none', borderRadius:'0', minHeight:'80vh'}}>
               <ListGroup.Item style={{padding:'0'}}>
                 <h6 style={{padding:'1rem', backgroundColor:'lightblue'}}>INPROGRESS</h6>
-                {tasks.map(task => (
+                {tasks && tasks.map(task => (
                   task.status === 2 && (
                     <Link key={task.id} style={{textDecoration:'none'}}  to={`/task/${task.id}`}>
                       <Card className='p-1 m-1'>
@@ -198,7 +166,7 @@ function TaskListScreen() {
             <ListGroup style={{padding:'none', borderRadius:'0', minHeight:'80vh'}}>
               <ListGroup.Item style={{padding:'0'}}>
                 <h6 style={{padding:'1rem', backgroundColor:'lightblue'}}>DONE</h6>
-                {tasks.map(task => (
+                {tasks && tasks.map(task => (
                   task.status === 3 && (
                     <Link key={task.id} style={{textDecoration:'none'}}  to={`/task/${task.id}`}>
                       <Card className='p-1 m-1'>

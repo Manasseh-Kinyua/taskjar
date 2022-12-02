@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from .models import Project, Task
+from .models import Project, Task, Message
 from rest_framework_simplejwt.tokens import RefreshToken
 
 class UserSerializer(serializers.ModelSerializer):
@@ -31,6 +31,11 @@ class UserSerializerWithToken(UserSerializer):
         token = RefreshToken.for_user(obj)
         return str(token.access_token)
 
+class MessageSerializerForTask(serializers.ModelSerializer):
+    class Meta:
+        model = Message
+        fields = "__all__"
+
 class ProjectSerializerForTask(serializers.ModelSerializer):
     class Meta:
         model = Project
@@ -40,6 +45,7 @@ class TaskSerializer(serializers.ModelSerializer):
     creator = serializers.SerializerMethodField(read_only=True)
     handler = serializers.SerializerMethodField(read_only=True)
     project = serializers.SerializerMethodField(read_only=True)
+    messages = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = Task
@@ -58,6 +64,11 @@ class TaskSerializer(serializers.ModelSerializer):
     def get_project(self, obj):
         project = obj.project
         serializer = ProjectSerializerForTask(project, many=False)
+        return serializer.data
+
+    def get_messages(self, obj):
+        messages = obj.message_set.all()
+        serializer = MessageSerializerForTask(messages, many=True)
         return serializer.data
 
 class ProjectSerializer(serializers.ModelSerializer):

@@ -1,7 +1,7 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
-from base.models import Task, Project
+from base.models import Task, Project, Message
 from base.serializers import TaskSerializer
 
 @api_view(['GET'])
@@ -85,3 +85,17 @@ def deleteTask(request, pk):
     task = Task.objects.get(id=pk)
     task.delete()
     return Response('Task was Deleted')
+
+def createTaskMessage(request):
+    user =request.user
+    data = request.data
+    task_id = data['task_id']
+    task = Task.objects.get(id=task_id)
+
+    message = Message.objects.create(
+        user=user,
+        task=task,
+        body=data['body']
+    )
+
+    return Response('')

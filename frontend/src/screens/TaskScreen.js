@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useLocation, Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { listTaskDetails } from '../actions/taskActions'
 import Container from '@mui/material/Container';
@@ -11,6 +11,12 @@ import Message from '../components/Message'
 function TaskScreen() {
 
     const params = useParams()
+
+    const location = useLocation()
+    const searchParams = new URLSearchParams(location.search)
+    const projectName = searchParams.get('p-name')
+    const projectId = searchParams.get('p-id')
+    console.log(projectName, projectId)
 
     const navigate = useNavigate()
 
@@ -34,6 +40,7 @@ function TaskScreen() {
   return (
     <div>
       <Container maxWidth="xl">
+        <Link to={`/project/${projectId}/tasks?name=${projectName}`}><p>Back to tasks</p></Link>
         <Row>
           <Col md={6}>
             <ListGroup>
