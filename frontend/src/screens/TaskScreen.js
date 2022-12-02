@@ -19,7 +19,6 @@ function TaskScreen() {
     const searchParams = new URLSearchParams(location.search)
     const projectName = searchParams.get('p-name')
     const projectId = searchParams.get('p-id')
-    console.log(projectName, projectId)
 
     const navigate = useNavigate()
 
@@ -30,11 +29,9 @@ function TaskScreen() {
 
     const taskDetail = useSelector(state => state.taskDetail)
     const {loading, error, task} = taskDetail
-    console.log(task)
 
     const taskCreateMessage = useSelector(state => state.taskCreateMessage)
     const {loading: loadingCreateMessage, error: errorCreateMessage, success: successCreateMessage, message} = taskCreateMessage
-    console.log(message)
 
     useEffect(() => {
       if(!userInfo) {
