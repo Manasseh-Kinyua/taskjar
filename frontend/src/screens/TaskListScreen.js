@@ -96,7 +96,7 @@ function TaskListScreen() {
                               <MoreVertIcon />
                             </Dropdown.Toggle>
 
-                            <Dropdown.Menu style={{background:'rgb(208, 41, 208)', width:'2%'}}>
+                            <Dropdown.Menu style={{background:'rgb(208, 41, 208)'}}>
                               <Dropdown.Item onClick={() => deleteTaskHandler(task.id)}>Delete</Dropdown.Item>
                               <Dropdown.Item>Edit</Dropdown.Item>
                             </Dropdown.Menu>

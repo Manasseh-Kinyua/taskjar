@@ -4,7 +4,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 
 import { projectCreateReducer, projectDeleteReducer, projectDetailsReducer, projectEditReducer, projectListReducer } from './reducers/projectReducers'
 import { userLoginReducer, userRegisterReducer } from './reducers/userReducers'
-import { taskCreateReducer, taskDeleteReducer, taskListReducer } from './reducers/taskReducers'
+import { taskCreateReducer, taskDeleteReducer, taskDetailReducer, taskListReducer } from './reducers/taskReducers'
 
 const reducer = combineReducers({
     projectList: projectListReducer,
@@ -17,6 +17,7 @@ const reducer = combineReducers({
     userLogin: userLoginReducer,
 
     taskList: taskListReducer,
+    taskDetail: taskDetailReducer,
     taskCreate: taskCreateReducer,
     taskDelete: taskDeleteReducer,
 })

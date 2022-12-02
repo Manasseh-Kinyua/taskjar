@@ -3,6 +3,10 @@ import {
     TASK_LIST_SUCCESS,
     TASK_LIST_FAIL,
 
+    TASK_DETAIL_REQUEST,
+    TASK_DETAIL_SUCCESS,
+    TASK_DETAIL_FAIL,
+
     CREATE_TASK_REQUEST,
     CREATE_TASK_SUCCESS,
     CREATE_TASK_FAIL,
@@ -27,6 +31,31 @@ export const taskListReducer = (state = {tasks:[]}, action) => {
             }
 
         case TASK_LIST_FAIL:
+            return {
+                loading: false,
+                error: action.payload
+            }
+
+        default:
+            return state
+    }
+}
+
+export const taskDetailReducer = (state = {task:{}}, action) => {
+    switch(action.type) {
+        case TASK_DETAIL_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+
+        case TASK_DETAIL_SUCCESS:
+            return {
+                loading: false,
+                task: action.payload
+            }
+
+        case TASK_DETAIL_FAIL:
             return {
                 loading: false,
                 error: action.payload

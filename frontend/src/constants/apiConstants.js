@@ -8,6 +8,7 @@ export const EDIT_PROJECT_ENDPOINT = `${BASE_URL}projects/edit/`
 export const DELETE_PROJECT_ENDPOINT = `${BASE_URL}projects/delete/`
 
 export const GET_PROJECT_TASKS_ENDPOINT = `${BASE_URL}tasks/for-project/`
+export const GET_SINGLE_TASK_ENDPOINT = `${BASE_URL}tasks/`
 export const CREATE_TASK_ENDPOINT = `${BASE_URL}tasks/create/`
 export const DELETE_TASK_ENDPOINT = `${BASE_URL}tasks/delete/`
 
