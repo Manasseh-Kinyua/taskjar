@@ -4,6 +4,7 @@ from base.views import task_views as views
 urlpatterns = [
     path('for-project/<str:pk>/', views.getProjectTasks, name='project-tasks'),
     path('create/', views.createTask, name='create-task'),
+    path('message/create/', views.createTaskMessage, name='create-task-message'),
     path('<str:pk>/', views.getSingleTask, name='single-task'),
     path('edit/<str:pk>/', views.editTask, name='edit-task'),
     path('update/to-in-progress/<str:pk>/', views.updateTaskToInProgress, name='in-progress-task'),
