@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { listTaskDetails } from '../actions/taskActions'
 import Container from '@mui/material/Container';
 import Chip from '@mui/material/Chip';
+import Avatar from '@mui/material/Avatar';
 import { Row, Col, ListGroup, Card } from 'react-bootstrap'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
@@ -74,6 +75,24 @@ function TaskScreen() {
                     )}
                   </Col>
                 </Row>
+              </ListGroup.Item>
+
+              <ListGroup.Item style={{width:'95%', border:'.1rem solid grey', margin:'1rem auto'}}>
+                <h6>Conversation</h6>
+                {task.messages && task.messages.map(message => (
+                  <div className='p-1' style={{borderLeft:'.2rem solid rgb(208, 41, 208)'}} key={message.id}>
+                    <span style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
+                      <span style={{display:'flex', alignItems:'center'}}>
+                        <Avatar sx={{ width: 40, height: 40 }} alt="Remy Sharp" src="https://www.shutterstock.com/image-illustration/male-profile-picture-silhouette-avatar-260nw-149293406.jpg" />
+                        <small> @{message.user.name}</small>
+                      </span>
+                      <small>{message.createdAt && message.createdAt.substring(0,10)}</small>
+                    </span>
+                    {/* <span style={{marginLeft:'1rem'}}> */}
+                      <p style={{marginLeft:'2.7rem'}}>{message.body}</p>
+                    {/* </span> */}
+                </div>
+                ))}
               </ListGroup.Item>
             </ListGroup>
           </Col>
