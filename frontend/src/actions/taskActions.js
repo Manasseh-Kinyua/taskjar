@@ -148,7 +148,7 @@ export const editTask = (task) => async (dispatch, getState) => {
         }
 
         const {data} = await axios.put(
-            `${EDIT_TASK_ENDPOINT}${task.id}`,
+            `${EDIT_TASK_ENDPOINT}${task.id}/`,
             task,
             config
         )

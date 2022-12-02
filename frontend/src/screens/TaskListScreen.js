@@ -66,7 +66,7 @@ function TaskListScreen() {
 
                             <Dropdown.Menu style={{background:'rgb(208, 41, 208)'}}>
                               <Dropdown.Item onClick={() => deleteTaskHandler(task.id)}>Delete</Dropdown.Item>
-                              <Dropdown.Item as={Link} to={`/task/${task.id}/edit`}>Edit</Dropdown.Item>
+                              <Dropdown.Item as={Link} to={`/task/${task.id}/edit?p-id=${projectId}&p-name=${projectName}`}>Edit</Dropdown.Item>
                             </Dropdown.Menu>
                           </Dropdown>
                         </span>
@@ -111,7 +111,7 @@ function TaskListScreen() {
 
                             <Dropdown.Menu style={{background:'rgb(208, 41, 208)'}}>
                               <Dropdown.Item onClick={() => deleteTaskHandler(task.id)}>Delete</Dropdown.Item>
-                              <Dropdown.Item as={Link} to={`/task/${task.id}/edit`}>Edit</Dropdown.Item>
+                              <Dropdown.Item as={Link} to={`/task/${task.id}/edit?p-id=${projectId}&p-name=${projectName}`}>Edit</Dropdown.Item>
                             </Dropdown.Menu>
                           </Dropdown>
                         </span>
@@ -156,7 +156,7 @@ function TaskListScreen() {
 
                             <Dropdown.Menu style={{background:'rgb(208, 41, 208)'}}>
                               <Dropdown.Item onClick={() => deleteTaskHandler(task.id)}>Delete</Dropdown.Item>
-                              <Dropdown.Item as={Link} to={`/task/${task.id}/edit`}>Edit</Dropdown.Item>
+                              <Dropdown.Item as={Link} to={`/task/${task.id}/edit?p-id=${projectId}&p-name=${projectName}`}>Edit</Dropdown.Item>
                             </Dropdown.Menu>
                           </Dropdown>
                         </span>
@@ -201,7 +201,7 @@ function TaskListScreen() {
 
                             <Dropdown.Menu style={{background:'rgb(208, 41, 208)'}}>
                               <Dropdown.Item onClick={() => deleteTaskHandler(task.id)}>Delete</Dropdown.Item>
-                              <Dropdown.Item as={Link} to={`/task/${task.id}/edit`}>Edit</Dropdown.Item>
+                              <Dropdown.Item as={Link} to={`/task/${task.id}/edit?p-id=${projectId}&p-name=${projectName}`}>Edit</Dropdown.Item>
                             </Dropdown.Menu>
                           </Dropdown>
                         </span>

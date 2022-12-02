@@ -7,7 +7,8 @@ import { useNavigate } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
-import { createTask, listTaskDetails } from '../actions/taskActions'
+import { createTask, editTask, listTaskDetails } from '../actions/taskActions'
+import { EDIT_TASK_RESET } from '../constants/taskConstants'
 
 function TaskEditScreen() {
 
@@ -20,7 +21,8 @@ function TaskEditScreen() {
 
     const location = useLocation()
     const searchParams = new URLSearchParams(location.search)
-    const projectName = searchParams.get('name')
+    const projectName = searchParams.get('p-name')
+    const projectId = searchParams.get('p-id')
 
     const navigate = useNavigate()
 
@@ -32,7 +34,14 @@ function TaskEditScreen() {
     const taskDetail = useSelector(state => state.taskDetail)
     const {task} = taskDetail
 
+    const taskEdit = useSelector(state => state.taskEdit)
+    const {loading, error, success} = taskEdit
+
     useEffect(() => {
+      if(success) {
+        dispatch({type: EDIT_TASK_RESET})
+        navigate(`/project/${projectId}/tasks?name=${projectName}`)
+      }
       if(!userInfo) {
         navigate('/login')
       } else {
@@ -45,10 +54,15 @@ function TaskEditScreen() {
             setDescription(task.description)
         }
       }
-    }, [dispatch, navigate, userInfo, task, params.id])
+    }, [dispatch, navigate, userInfo, task, params.id, success])
 
     const submitHandler = (e) => {
         e.preventDefault()
+
+        dispatch(editTask({
+            id: params.id,
+            name, type, urgency, description
+        }))
     }
 
   return (
@@ -60,6 +74,8 @@ function TaskEditScreen() {
               <strong>EDIT TASK</strong>
             </span>
             <Form className='p-3' onSubmit={submitHandler}>
+                {loading && <Loader />}
+                {error && <Message variant='warning'>{error}</Message>}
               <Form.Group controlId='name'>
                 <Form.Label>Name</Form.Label>
                 <Form.Control
