@@ -7,7 +7,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Chip from '@mui/material/Chip';
 import { Row, Col, Card, ListGroup, Button } from 'react-bootstrap'
 import Dropdown from 'react-bootstrap/Dropdown';
-import { deleteTask, listTasks, markTaskAsInProgress } from '../actions/taskActions'
+import { deleteTask, listTasks, markTaskAsDone, markTaskAsInProgress } from '../actions/taskActions'
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 
@@ -31,9 +31,12 @@ function TaskListScreen() {
     const taskUpdateToInProgress = useSelector(state => state.taskUpdateToInProgress)
     const {loading: loadingMarkInProgress, error: errorMarkInProgress, success: successMarkInProgress} = taskUpdateToInProgress
 
+    const taskUpdateToDone = useSelector(state => state.taskUpdateToDone)
+    const {loading: loadingMarkDone, error: errorMarkDone, success: successMarkDone} = taskUpdateToDone
+
     useEffect(() => {
       dispatch(listTasks(params.id))
-    }, [dispatch, params.id, successDeleteTask, successMarkInProgress])
+    }, [dispatch, params.id, successDeleteTask, successMarkInProgress, successMarkDone])
 
     const deleteTaskHandler = (id) => {
       if(window.confirm("Are you sure you want to delete these task?")) {
@@ -43,6 +46,10 @@ function TaskListScreen() {
 
     const markTaskAsInProgressHandler = (id) => {
       dispatch(markTaskAsInProgress(id))
+    }
+
+    const markTaskAsDoneHandler = (id) => {
+      dispatch(markTaskAsDone(id))
     }
 
   return (
@@ -165,6 +172,7 @@ function TaskListScreen() {
                             <Dropdown.Menu style={{background:'rgb(208, 41, 208)'}}>
                               <Dropdown.Item onClick={() => deleteTaskHandler(task.id)}>Delete</Dropdown.Item>
                               <Dropdown.Item as={Link} to={`/task/${task.id}/edit?p-id=${projectId}&p-name=${projectName}`}>Edit</Dropdown.Item>
+                              <Dropdown.Item onClick={() => markTaskAsDoneHandler(task.id)}>Mark Done</Dropdown.Item>
                             </Dropdown.Menu>
                           </Dropdown>
                         </span>

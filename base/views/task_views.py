@@ -87,7 +87,7 @@ def updateTaskToInProgress(request, pk):
     return Response(serializer.data)
 
 @api_view(['PUT'])
-@permission_classes([IsAuthenticated])
+# @permission_classes([IsAuthenticated])
 def updateTaskToDone(request, pk):
     task = Task.objects.get(id=pk)
 
