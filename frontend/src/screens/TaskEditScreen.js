@@ -103,11 +103,10 @@ function TaskEditScreen() {
               </Form.Group>
 
               <Form.Group controlId='urgency'>
-                <Form.Label>Name</Form.Label>
+                <Form.Label>Urgency</Form.Label>
                 <Form.Select
                   aria-label
                   required
-                  as='select'
                   value={urgency}
                   onChange={(e) => setUrgency(e.target.value)}
                   >

@@ -45,11 +45,12 @@ def createTask(request):
 @permission_classes([IsAuthenticated])
 def editTask(request, pk):
     data = request.data
+    print('DATACOMING IN......', data)
     task = Task.objects.get(id=pk)
 
-    task.name=data['name'],
-    task.type=data['type'],
-    task.urgency=data['urgency'],
+    task.name=data['name']
+    task.type=data['type']
+    task.urgency=data['urgency']
     task.description=data['description']
 
     task.save()
