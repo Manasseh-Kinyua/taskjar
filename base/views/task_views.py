@@ -3,6 +3,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from base.models import Task, Project, Message
 from base.serializers import TaskSerializer, MessageSerializerForTask
+from django.contrib.auth.models import User
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
@@ -37,6 +38,23 @@ def createTask(request):
         status=0,
         description=data['description']
     )
+    serializer = TaskSerializer(task, many=False)
+
+    return Response(serializer.data)
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def assignTaskToUser(request, pk):
+    data = request.data
+    handler_id = data['user']
+    
+    task = Task.objects.get(id=pk)
+    handler = User.objects.get(id=handler_id)
+
+    task.handler = handler
+    task.status = 1
+
+    task.save()
     serializer = TaskSerializer(task, many=False)
 
     return Response(serializer.data)

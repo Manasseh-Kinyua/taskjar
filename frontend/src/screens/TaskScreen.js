@@ -5,7 +5,7 @@ import { createTaskMessage, listTaskDetails } from '../actions/taskActions'
 import Container from '@mui/material/Container';
 import Chip from '@mui/material/Chip';
 import Avatar from '@mui/material/Avatar';
-import { Row, Col, ListGroup, Form } from 'react-bootstrap'
+import { Row, Col, ListGroup, Form, Button } from 'react-bootstrap'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import { listProjectDetails } from '../actions/projectActions';
@@ -58,6 +58,10 @@ function TaskScreen() {
         task_id: params.id,
         body
       }))
+    }
+
+    const submitAssignUserHandler = (e) => {
+      e.preventDefault()
     }
 
   return (
@@ -131,8 +135,8 @@ function TaskScreen() {
 
           <Col md={3}>
             {task && task.status === 0 && (
-              <Form>
-                <h5>Assing a user</h5>
+              <Form className='p-4' style={{border:'.1rem solid grey', borderRadius:'4px'}} onSubmit={submitAssignUserHandler}>
+                <h5>Assign a user</h5>
                 <Form.Group>
                   {/* <Form.Label>Assign a user</Form.Label> */}
                   <Form.Select
@@ -146,6 +150,7 @@ function TaskScreen() {
                       ))}
                     </Form.Select>
                 </Form.Group>
+                <Button style={{backgroundColor:'rgb(208, 41, 208)', width:'100%'}} className='my-1'>ASSIGN</Button>
               </Form>
             )}
           </Col>
