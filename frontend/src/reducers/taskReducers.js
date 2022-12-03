@@ -19,6 +19,10 @@ import {
     UPDATE_TASK_TO_IN_PROGRESS_SUCCESS,
     UPDATE_TASK_TO_IN_PROGRESS_FAIL,
 
+    UPDATE_TASK_TO_DONE_REQUEST,
+    UPDATE_TASK_TO_DONE_SUCCESS,
+    UPDATE_TASK_TO_DONE_FAIL,
+
     EDIT_TASK_REQUEST,
     EDIT_TASK_SUCCESS,
     EDIT_TASK_FAIL,
@@ -148,6 +152,31 @@ export const taskUpdateToInProgressReducer = (state = {}, action) => {
             }
 
         case UPDATE_TASK_TO_IN_PROGRESS_FAIL:
+            return {
+                loading: false,
+                error: action.payload
+            }
+
+        default:
+            return state
+    }
+}
+
+export const taskUpdateToDoneReducer = (state = {}, action) => {
+    switch(action.type) {
+        case UPDATE_TASK_TO_DONE_REQUEST:
+            return {
+                loading: true
+            }
+
+        case UPDATE_TASK_TO_DONE_SUCCESS:
+            return {
+                loading: false,
+                success: true,
+                task: action.payload
+            }
+
+        case UPDATE_TASK_TO_DONE_FAIL:
             return {
                 loading: false,
                 error: action.payload
