@@ -11,6 +11,10 @@ import {
     CREATE_TASK_SUCCESS,
     CREATE_TASK_FAIL,
 
+    ASSIGN_TASK_REQUEST,
+    ASSIGN_TASK_SUCCESS,
+    ASSIGN_TASK_FAIL,
+
     EDIT_TASK_REQUEST,
     EDIT_TASK_SUCCESS,
     EDIT_TASK_FAIL,
@@ -23,7 +27,7 @@ import {
     DELETE_TASK_SUCCESS,
     DELETE_TASK_FAIL,
 } from "../constants/taskConstants";
-import { CREATE_TASK_ENDPOINT, CREATE_TASK_MESSAGE_ENDPOINT, DELETE_TASK_ENDPOINT, EDIT_TASK_ENDPOINT, GET_PROJECT_TASKS_ENDPOINT, GET_SINGLE_TASK_ENDPOINT } from "../constants/apiConstants";
+import { ASSIGN_TASK_ENDPOINT, CREATE_TASK_ENDPOINT, CREATE_TASK_MESSAGE_ENDPOINT, DELETE_TASK_ENDPOINT, EDIT_TASK_ENDPOINT, GET_PROJECT_TASKS_ENDPOINT, GET_SINGLE_TASK_ENDPOINT } from "../constants/apiConstants";
 import axios from 'axios'
 
 export const listTasks = (id) => async (dispatch, getState) => {
@@ -125,6 +129,42 @@ export const createTask = (task) => async (dispatch, getState) => {
     } catch(error) {
         dispatch({
             type: CREATE_TASK_FAIL,
+            payload: error.response && error.response.data.detail
+                ? error.response.data.detail
+                : error.message
+        })
+    }
+}
+
+export const assignTask = (taskId, user) => async (dispatch, getState) => {
+    try {
+        dispatch({type: ASSIGN_TASK_REQUEST})
+
+        const {
+            userLogin: {userInfo}
+        } = getState()
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
+
+        const {data} = await axios.put(
+            `${ASSIGN_TASK_ENDPOINT}${taskId}/`,
+            user,
+            config
+        )
+
+        dispatch({
+            type: ASSIGN_TASK_SUCCESS,
+            payload: data
+        })
+
+    } catch(error) {
+        dispatch({
+            type: ASSIGN_TASK_FAIL,
             payload: error.response && error.response.data.detail
                 ? error.response.data.detail
                 : error.message

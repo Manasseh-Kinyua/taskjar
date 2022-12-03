@@ -12,6 +12,7 @@ export const GET_SINGLE_TASK_ENDPOINT = `${BASE_URL}tasks/`
 export const CREATE_TASK_ENDPOINT = `${BASE_URL}tasks/create/`
 export const CREATE_TASK_MESSAGE_ENDPOINT = `${BASE_URL}tasks/message/create/`
 export const EDIT_TASK_ENDPOINT = `${BASE_URL}tasks/edit/`
+export const ASSIGN_TASK_ENDPOINT = `${BASE_URL}tasks/assign-user/`
 export const DELETE_TASK_ENDPOINT = `${BASE_URL}tasks/delete/`
 
 export const USER_REGISTER_ENDPOINT = `${BASE_URL}users/register/`

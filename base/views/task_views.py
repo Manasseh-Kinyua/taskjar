@@ -42,7 +42,7 @@ def createTask(request):
 
     return Response(serializer.data)
 
-@api_view(['POST'])
+@api_view(['PUT'])
 @permission_classes([IsAuthenticated])
 def assignTaskToUser(request, pk):
     data = request.data

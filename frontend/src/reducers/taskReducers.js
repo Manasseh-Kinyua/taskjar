@@ -11,6 +11,10 @@ import {
     CREATE_TASK_SUCCESS,
     CREATE_TASK_FAIL,
 
+    ASSIGN_TASK_REQUEST,
+    ASSIGN_TASK_SUCCESS,
+    ASSIGN_TASK_FAIL,
+
     EDIT_TASK_REQUEST,
     EDIT_TASK_SUCCESS,
     EDIT_TASK_FAIL,
@@ -90,6 +94,31 @@ export const taskCreateReducer = (state = {}, action) => {
             }
 
         case CREATE_TASK_FAIL:
+            return {
+                loading: false,
+                error: action.payload
+            }
+
+        default:
+            return state
+    }
+}
+
+export const taskAssignReducer = (state = {}, action) => {
+    switch(action.type) {
+        case ASSIGN_TASK_REQUEST:
+            return {
+                loading: true
+            }
+
+        case ASSIGN_TASK_SUCCESS:
+            return {
+                loading: false,
+                success: true,
+                task: action.payload
+            }
+
+        case ASSIGN_TASK_FAIL:
             return {
                 loading: false,
                 error: action.payload
