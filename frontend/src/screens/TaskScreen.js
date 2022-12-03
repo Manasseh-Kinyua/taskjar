@@ -8,10 +8,12 @@ import Avatar from '@mui/material/Avatar';
 import { Row, Col, ListGroup, Form } from 'react-bootstrap'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
+import { listProjectDetails } from '../actions/projectActions';
 
 function TaskScreen() {
 
     const [body, setBody] = useState('')
+    const [user, setUser] = useState('')
 
     const params = useParams()
 
@@ -30,6 +32,10 @@ function TaskScreen() {
     const taskDetail = useSelector(state => state.taskDetail)
     const {loading, error, task} = taskDetail
 
+    const projectDetails = useSelector(state => state.projectDetails)
+    const {project} = projectDetails
+    console.log(project)
+
     const taskCreateMessage = useSelector(state => state.taskCreateMessage)
     const {loading: loadingCreateMessage, error: errorCreateMessage, success: successCreateMessage, message} = taskCreateMessage
 
@@ -38,11 +44,12 @@ function TaskScreen() {
         navigate('/login')
       } else {
         dispatch(listTaskDetails(params.id))
+        dispatch(listProjectDetails(projectId))
       }
       if(successCreateMessage) {
         setBody('')
       }
-    }, [dispatch, userInfo, navigate, params.id, successCreateMessage])
+    }, [dispatch, userInfo, navigate, params.id, projectId, successCreateMessage])
 
     const submitMessageHandler = (e) => {
       e.preventDefault()
@@ -120,6 +127,27 @@ function TaskScreen() {
                 </Form>
               </ListGroup.Item>
             </ListGroup>
+          </Col>
+
+          <Col md={3}>
+            {task && task.status === 0 && (
+              <Form>
+                <h5>Assing a user</h5>
+                <Form.Group>
+                  {/* <Form.Label>Assign a user</Form.Label> */}
+                  <Form.Select
+                    aria-label
+                    required
+                    value={user}
+                    onChange={(e) => setUser(e.target.value)}>
+                      <option value=''>Select user to assign...</option>
+                      {project.contributors && project.contributors.map(contributor => (
+                        <option value={contributor.id}>{contributor.name}</option>
+                      ))}
+                    </Form.Select>
+                </Form.Group>
+              </Form>
+            )}
           </Col>
         </Row>
       </Container>
