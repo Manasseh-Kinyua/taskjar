@@ -37,7 +37,6 @@ function TaskScreen() {
 
     const projectDetails = useSelector(state => state.projectDetails)
     const {project} = projectDetails
-    console.log(project)
 
     const taskCreateMessage = useSelector(state => state.taskCreateMessage)
     const {loading: loadingCreateMessage, error: errorCreateMessage, success: successCreateMessage, message} = taskCreateMessage
