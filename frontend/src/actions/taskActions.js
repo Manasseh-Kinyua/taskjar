@@ -181,7 +181,7 @@ export const assignTask = (taskId, user) => async (dispatch, getState) => {
     }
 }
 
-export const markTaskAsInProgress = (taskId) => async (dispatch, getState) => {
+export const markTaskAsInProgress = (id) => async (dispatch, getState) => {
     try {
         dispatch({type: UPDATE_TASK_TO_IN_PROGRESS_REQUEST})
 
@@ -197,7 +197,7 @@ export const markTaskAsInProgress = (taskId) => async (dispatch, getState) => {
         }
 
         const {data} = await axios.put(
-            `${UPDATE_TASK_TO_IN_PROGRESS_ENDPOINT}${taskId}/`,
+            `${UPDATE_TASK_TO_IN_PROGRESS_ENDPOINT}${id}/`,
             config
         )
 

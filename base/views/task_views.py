@@ -63,7 +63,6 @@ def assignTaskToUser(request, pk):
 @permission_classes([IsAuthenticated])
 def editTask(request, pk):
     data = request.data
-    print('DATACOMING IN......', data)
     task = Task.objects.get(id=pk)
 
     task.name=data['name']
@@ -77,7 +76,7 @@ def editTask(request, pk):
     return Response(serializer.data)
 
 @api_view(['PUT'])
-@permission_classes([IsAuthenticated])
+# @permission_classes([IsAuthenticated])
 def updateTaskToInProgress(request, pk):
     task = Task.objects.get(id=pk)
 

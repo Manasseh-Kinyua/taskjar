@@ -7,7 +7,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Chip from '@mui/material/Chip';
 import { Row, Col, Card, ListGroup, Button } from 'react-bootstrap'
 import Dropdown from 'react-bootstrap/Dropdown';
-import { deleteTask, listTasks } from '../actions/taskActions'
+import { deleteTask, listTasks, markTaskAsInProgress } from '../actions/taskActions'
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 
@@ -28,14 +28,21 @@ function TaskListScreen() {
     const taskDelete = useSelector(state => state.taskDelete)
     const {loading: loadingDeleteTask, error: errorDeleteTask, success: successDeleteTask} = taskDelete
 
+    const taskUpdateToInProgress = useSelector(state => state.taskUpdateToInProgress)
+    const {loading: loadingMarkInProgress, error: errorMarkInProgress, success: successMarkInProgress} = taskUpdateToInProgress
+
     useEffect(() => {
       dispatch(listTasks(params.id))
-    }, [dispatch, params.id, successDeleteTask])
+    }, [dispatch, params.id, successDeleteTask, successMarkInProgress])
 
     const deleteTaskHandler = (id) => {
       if(window.confirm("Are you sure you want to delete these task?")) {
         dispatch(deleteTask(id))
       }
+    }
+
+    const markTaskAsInProgressHandler = (id) => {
+      dispatch(markTaskAsInProgress(id))
     }
 
   return (
@@ -104,7 +111,7 @@ function TaskListScreen() {
                       <Card className='p-1 m-1'>
                         <span className='py-2' style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
                           <Link to={`/task/${task.id}?p-id=${projectId}&p-name=${projectName}`}><h6>{task.name}</h6></Link>
-                          <Dropdown>
+                          <Dropdown >
                             <Dropdown.Toggle style={{background:'none', border:'none'}} >
                               <MoreVertIcon />
                             </Dropdown.Toggle>
@@ -112,6 +119,7 @@ function TaskListScreen() {
                             <Dropdown.Menu style={{background:'rgb(208, 41, 208)'}}>
                               <Dropdown.Item onClick={() => deleteTaskHandler(task.id)}>Delete</Dropdown.Item>
                               <Dropdown.Item as={Link} to={`/task/${task.id}/edit?p-id=${projectId}&p-name=${projectName}`}>Edit</Dropdown.Item>
+                              <Dropdown.Item onClick={() => markTaskAsInProgressHandler(task.id)}>In Progress</Dropdown.Item>
                             </Dropdown.Menu>
                           </Dropdown>
                         </span>
