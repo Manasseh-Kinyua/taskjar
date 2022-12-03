@@ -8,6 +8,7 @@ import { useLocation } from 'react-router-dom'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import { createTask } from '../actions/taskActions'
+import { CREATE_TASK_RESET } from '../constants/taskConstants'
 
 function CreateTaskScreen() {
 
@@ -38,6 +39,7 @@ function CreateTaskScreen() {
       }
 
       if(successCreateTask) {
+        dispatch({type: CREATE_TASK_RESET})
         navigate(`/project/${params.id}/tasks?name=${projectName}`)
       }
     }, [navigate, userInfo, successCreateTask])

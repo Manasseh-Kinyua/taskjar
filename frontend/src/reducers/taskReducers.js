@@ -10,6 +10,7 @@ import {
     CREATE_TASK_REQUEST,
     CREATE_TASK_SUCCESS,
     CREATE_TASK_FAIL,
+    CREATE_TASK_RESET,
 
     ASSIGN_TASK_REQUEST,
     ASSIGN_TASK_SUCCESS,
@@ -106,6 +107,9 @@ export const taskCreateReducer = (state = {}, action) => {
                 loading: false,
                 error: action.payload
             }
+
+        case CREATE_TASK_RESET:
+            return {}
 
         default:
             return state
