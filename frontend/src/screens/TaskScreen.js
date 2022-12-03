@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams, useLocation, Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { createTaskMessage, listTaskDetails } from '../actions/taskActions'
+import { assignTask, createTaskMessage, listTaskDetails } from '../actions/taskActions'
 import Container from '@mui/material/Container';
 import Chip from '@mui/material/Chip';
 import Avatar from '@mui/material/Avatar';
@@ -30,7 +30,10 @@ function TaskScreen() {
     const {userInfo} = userLogin
 
     const taskDetail = useSelector(state => state.taskDetail)
-    const {loading, error, task} = taskDetail
+    const {task} = taskDetail
+
+    const taskAssign = useSelector(state => state.taskAssign)
+    const {loading: loadingAssingUser, error: errorAssingUser, siccess: successAssingUser} = taskAssign
 
     const projectDetails = useSelector(state => state.projectDetails)
     const {project} = projectDetails
@@ -49,7 +52,7 @@ function TaskScreen() {
       if(successCreateMessage) {
         setBody('')
       }
-    }, [dispatch, userInfo, navigate, params.id, projectId, successCreateMessage])
+    }, [dispatch, userInfo, navigate, params.id, projectId, successCreateMessage, successAssingUser])
 
     const submitMessageHandler = (e) => {
       e.preventDefault()
@@ -62,6 +65,11 @@ function TaskScreen() {
 
     const submitAssignUserHandler = (e) => {
       e.preventDefault()
+
+      dispatch(assignTask(
+        params.id,
+        {user}
+      ))
     }
 
   return (
@@ -137,6 +145,8 @@ function TaskScreen() {
             {task && task.status === 0 && (
               <Form className='p-4' style={{border:'.1rem solid grey', borderRadius:'4px'}} onSubmit={submitAssignUserHandler}>
                 <h5>Assign a user</h5>
+                {loadingAssingUser && <Loader />}
+                {errorAssingUser && <Message variant='warning'>{errorAssingUser}</Message>}
                 <Form.Group>
                   {/* <Form.Label>Assign a user</Form.Label> */}
                   <Form.Select
@@ -146,11 +156,11 @@ function TaskScreen() {
                     onChange={(e) => setUser(e.target.value)}>
                       <option value=''>Select user to assign...</option>
                       {project.contributors && project.contributors.map(contributor => (
-                        <option value={contributor.id}>{contributor.name}</option>
+                        <option key={contributor.id} value={contributor.id}>{contributor.name}</option>
                       ))}
                     </Form.Select>
                 </Form.Group>
-                <Button style={{backgroundColor:'rgb(208, 41, 208)', width:'100%'}} className='my-1'>ASSIGN</Button>
+                <Button type='submit' style={{backgroundColor:'rgb(208, 41, 208)', width:'100%'}} className='my-1'>ASSIGN</Button>
               </Form>
             )}
           </Col>

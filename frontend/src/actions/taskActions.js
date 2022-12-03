@@ -162,6 +162,11 @@ export const assignTask = (taskId, user) => async (dispatch, getState) => {
             payload: data
         })
 
+        dispatch({
+            type: TASK_DETAIL_SUCCESS,
+            payload: data
+        })
+
     } catch(error) {
         dispatch({
             type: ASSIGN_TASK_FAIL,
