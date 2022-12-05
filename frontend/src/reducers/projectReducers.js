@@ -7,6 +7,11 @@ import {
     PROJECT_DETAILS_SUCCESS,
     PROJECT_DETAILS_FAIL,
 
+    ADD_CONTRIBUTOR_REQUEST,
+    ADD_CONTRIBUTOR_SUCCESS,
+    ADD_CONTRIBUTOR_FAIL,
+    ADD_CONTRIBUTOR_RESET,
+
     PROJECT_CREATE_REQUEST,
     PROJECT_CREATE_SUCCESS,
     PROJECT_CREATE_FAIL,
@@ -94,6 +99,34 @@ export const projectCreateReducer = (state = {}, action) => {
             }
 
         case PROJECT_CREATE_RESET:
+            return {}
+
+        default:
+            return state
+    }
+}
+
+export const projectAddContributorReducer = (state = {}, action) => {
+    switch(action.type) {
+        case ADD_CONTRIBUTOR_REQUEST:
+            return {
+                loading: true,
+            }
+
+        case ADD_CONTRIBUTOR_SUCCESS:
+            return {
+                loading: false,
+                success: true,
+                project: action.payload
+            }
+
+        case ADD_CONTRIBUTOR_FAIL:
+            return {
+                loading: false,
+                error: action.payload
+            }
+
+        case ADD_CONTRIBUTOR_RESET:
             return {}
 
         default:
