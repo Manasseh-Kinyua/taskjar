@@ -104,7 +104,7 @@ export const createProject = () => async (dispatch, getState) => {
     }
 }
 
-export const addContributor = (user) => async (dispatch, getState) => {
+export const addContributor = (id, user) => async (dispatch, getState) => {
     try {
         dispatch({type: ADD_CONTRIBUTOR_REQUEST})
 
@@ -119,14 +119,19 @@ export const addContributor = (user) => async (dispatch, getState) => {
             }
         }
 
-        const {data} = await axios.post(
-            `${ADD_PROJECT_CONTRIBUTORS_ENDPOINT}${user.project_id}/`,
+        const {data} = await axios.put(
+            `${ADD_PROJECT_CONTRIBUTORS_ENDPOINT}${id}/`,
             {user},
             config
         )
 
         dispatch({
             type: ADD_CONTRIBUTOR_SUCCESS,
+            payload: data
+        })
+
+        dispatch({
+            type: PROJECT_DETAILS_SUCCESS,
             payload: data
         })
 

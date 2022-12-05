@@ -9,7 +9,7 @@ import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, useParams } from 'react-router-dom'
-import { listProjectDetails } from '../actions/projectActions'
+import { addContributor, listProjectDetails } from '../actions/projectActions'
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import { getContributors } from '../actions/userActions';
@@ -17,6 +17,7 @@ import { getContributors } from '../actions/userActions';
 function ProjectScreen() {
 
   const [user, setUser] = useState('')
+  console.log(user)
 
   const params = useParams()
 
@@ -29,15 +30,15 @@ function ProjectScreen() {
 
   const projectDetails = useSelector(state => state.projectDetails)
   const {loading, error, project} = projectDetails
-  console.log(project)
 
   const userLogin = useSelector(state => state.userLogin)
   const {userInfo} = userLogin
-  console.log(userInfo)
 
   const contributors = useSelector(state => state.contributors)
   const {selectUsers} = contributors
-  console.log('CONTRIBUTORS...', selectUsers)
+
+  const projectAddContributor = useSelector(state => state.projectAddContributor)
+  const {loading: loadingAddContributor, error: errorAddContributor, success: successAddContributor} = projectAddContributor
 
   useEffect(() => {
     dispatch(listProjectDetails(projectId))
@@ -47,6 +48,8 @@ function ProjectScreen() {
 
   const submitAddContributorHandler = (e) => {
     e.preventDefault()
+
+    dispatch(addContributor(projectId, user))
   }
 
   return (
@@ -107,6 +110,8 @@ function ProjectScreen() {
                   {project.scrum && userInfo && userInfo.id == project.scrum.id && (
                     <Form className='my-2' onSubmit={submitAddContributorHandler}>
                       <h6>Add Contributors</h6>
+                      {loadingAddContributor && <Loader />}
+                      {errorAddContributor && <Message variant='warning'>{errorAddContributor}</Message>}
                       <Form.Group>
                         <Form.Select
                           aria-label
@@ -115,7 +120,7 @@ function ProjectScreen() {
                           onChange={(e) => setUser(e.target.value)}>
                             <option value=''>Select User...</option>
                             {selectUsers && selectUsers.map(user => (
-                              <option key={user.id} value={user.id}>{user.name}</option>
+                              <option key={user.id} value={Number(user.id)}>{user.name}</option>
                             ))}
                           </Form.Select>
                       </Form.Group>

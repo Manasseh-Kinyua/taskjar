@@ -43,6 +43,7 @@ def createProject(request):
 def addContributors(request, pk):
     data = request.data
     user_id = data['user']
+    print('USER ID....', user_id)
 
     project = Project.objects.get(id=pk)
     user = User.objects.get(id=user_id)
