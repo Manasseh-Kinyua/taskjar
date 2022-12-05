@@ -14,6 +14,7 @@ import CreateTaskScreen from './screens/CreateTaskScreen';
 import TaskScreen from './screens/TaskScreen';
 import TaskEditScreen from './screens/TaskEditScreen';
 import UserListScreen from './screens/UserListScreen';
+import UserEditScreen from './screens/UserEditScreen';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
             <Route path='/task/:id' element={ <TaskScreen /> } />
             <Route path='/task/:id/edit' element={ <TaskEditScreen /> } />
             <Route path='/admin/userlist' element={ <UserListScreen /> } />
+            <Route path='/user/edit/:id' element={ <UserEditScreen /> } />
           </Routes>
         </main>
         <Footer />
