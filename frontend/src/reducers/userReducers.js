@@ -7,6 +7,10 @@ import {
     USER_REGISTER_REQUEST,
     USER_REGISTER_SUCCESS,
     USER_REGISTER_FAIL,
+
+    GET_CONTRIBUTORS_REQUEST,
+    GET_CONTRIBUTORS_SUCCESS,
+    GET_CONTRIBUTORS_FAIL,
 } from "../constants/userConstants";
 
 export const userRegisterReducer = (state = {}, action) => {
@@ -54,6 +58,30 @@ export const userLoginReducer = (state = {}, action) => {
 
         case USER_LOGOUT:
             return {}
+
+        default:
+            return state
+    }
+}
+
+export const contributorsReducer = (state = {}, action) => {
+    switch(action.type) {
+        case GET_CONTRIBUTORS_REQUEST:
+            return {
+                loading: true
+            }
+
+        case GET_CONTRIBUTORS_SUCCESS:
+            return {
+                loading: false,
+                users: action.payload
+            }
+
+        case GET_CONTRIBUTORS_FAIL:
+            return {
+                loading: false,
+                error: action.payload
+            }
 
         default:
             return state
