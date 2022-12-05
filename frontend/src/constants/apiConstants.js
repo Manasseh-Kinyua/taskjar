@@ -23,4 +23,5 @@ export const USER_LOGIN_ENDPOINT = `${BASE_URL}users/login/`
 export const GET_CONTRIBUTORS_ENDPOINT = `${BASE_URL}users/contributors/`
 export const GET_ALL_USERS_ENDPOINT = `${BASE_URL}users/`
 export const GET_USER_DETAILS_ENDPOINT = `${BASE_URL}users/`
+export const EDIT_USER_ENDPOINT = `${BASE_URL}users/edit/`
 export const DELETE_USER_ENDPOINT = `${BASE_URL}users/delete/`
