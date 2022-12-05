@@ -6,5 +6,6 @@ urlpatterns = [
     path('register/', views.registerUser, name='register'),
     path('profile/', views.getUserProfile, name='user-profile'),
     path('', views.getAllUsers, name='users'),
+    path('contributors', views.getContributors, name='contributors'),
     path('<str:pk>/', views.getSingleUser, name='user'),
 ]
