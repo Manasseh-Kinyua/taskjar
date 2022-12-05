@@ -7,6 +7,10 @@ import {
     PROJECT_DETAILS_SUCCESS,
     PROJECT_DETAILS_FAIL,
 
+    ADD_CONTRIBUTOR_REQUEST,
+    ADD_CONTRIBUTOR_SUCCESS,
+    ADD_CONTRIBUTOR_FAIL,
+
     PROJECT_CREATE_REQUEST,
     PROJECT_CREATE_SUCCESS,
     PROJECT_CREATE_FAIL,
@@ -19,7 +23,7 @@ import {
     PROJECT_DELETE_SUCCESS,
     PROJECT_DELETE_FAIL,
 } from '../constants/projectConstants'
-import { CREATE_PROJECT_ENDPOINT, DELETE_PROJECT_ENDPOINT, EDIT_PROJECT_ENDPOINT, GET_ALL_PROJECTS_ENDPOINT, GET_SINGLE_PROJECT_ENDPOINT } from '../constants/apiConstants'
+import { ADD_PROJECT_CONTRIBUTORS_ENDPOINT, CREATE_PROJECT_ENDPOINT, DELETE_PROJECT_ENDPOINT, EDIT_PROJECT_ENDPOINT, GET_ALL_PROJECTS_ENDPOINT, GET_SINGLE_PROJECT_ENDPOINT } from '../constants/apiConstants'
 import axios from 'axios'
 
 export const listProjects = () => async (dispatch) => {
@@ -93,6 +97,42 @@ export const createProject = () => async (dispatch, getState) => {
     } catch(error) {
         dispatch({
             type: PROJECT_CREATE_FAIL,
+            payload: error.response && error.response.data.detail
+                ? error.response.data.detail
+                : error.message
+        })
+    }
+}
+
+export const addContributor = (user) => async (dispatch, getState) => {
+    try {
+        dispatch({type: ADD_CONTRIBUTOR_REQUEST})
+
+        const {
+            userLogin: {userInfo}
+        } = getState()
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
+
+        const {data} = await axios.post(
+            `${ADD_PROJECT_CONTRIBUTORS_ENDPOINT}${user.project_id}/`,
+            {user},
+            config
+        )
+
+        dispatch({
+            type: ADD_CONTRIBUTOR_SUCCESS,
+            payload: data
+        })
+
+    } catch(error) {
+        dispatch({
+            type: ADD_CONTRIBUTOR_FAIL,
             payload: error.response && error.response.data.detail
                 ? error.response.data.detail
                 : error.message
