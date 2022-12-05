@@ -118,7 +118,7 @@ export const getContributors = () => async (dispatch) => {
     }
 }
 
-export const getAllUsers = () => async (dispatch) => {
+export const getAllUsers = () => async (dispatch, getState) => {
     try {
         dispatch({type: USER_LIST_REQUEST})
 
