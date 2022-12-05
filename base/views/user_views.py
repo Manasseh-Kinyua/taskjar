@@ -77,8 +77,9 @@ def getSingleUser(request, pk):
 def editUserUser(request, pk):
     data = request.data
     user = User.objects.get(id=pk)
+    print(data)
 
-    user.is_staff = data['sAdmin']
+    user.is_staff = data['isAdmin']
     
     user.save()
     serializer = UserSerializer(user, many=False)

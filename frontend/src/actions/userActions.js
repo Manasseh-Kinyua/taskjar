@@ -200,7 +200,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
     }
 }
 
-export const editUser = (id) => async (dispatch, getState) => {
+export const editUser = (id, user) => async (dispatch, getState) => {
     try {
         dispatch({type: USER_EDIT_REQUEST})
 
@@ -217,6 +217,7 @@ export const editUser = (id) => async (dispatch, getState) => {
 
         const {data} = await axios.put(
             `${EDIT_USER_ENDPOINT}${id}/`,
+            user,
             config
         )
 

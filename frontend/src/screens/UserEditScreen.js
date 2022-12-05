@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Container from '@mui/material/Container';
 import { Form, Button } from 'react-bootstrap'
 import Loader from '../components/Loader';
 import Message from '../components/Message';
-import { getUserDetails } from '../actions/userActions';
+import { editUser, getUserDetails } from '../actions/userActions';
+import { USER_EDIT_RESET } from '../constants/userConstants';
 
 function UserEditScreen() {
 
@@ -15,24 +16,36 @@ function UserEditScreen() {
 
     const params = useParams()
 
+    const navigate = useNavigate()
+
     const dispatch = useDispatch()
 
     const userDetails = useSelector(state => state.userDetails)
     const {loading, error, user} = userDetails
     console.log(user)
 
+    const userEdit = useSelector(state => state.userEdit)
+    const {loading: loadingEditUser, error: errorEditUser, success: successEditUser} = userEdit
+
     useEffect(() => {
-      if(!user || user.id !== Number(params.id)) {
-        dispatch(getUserDetails(params.id))
+      if(successEditUser) {
+        dispatch({type: USER_EDIT_RESET})
+        navigate('/admin/userlist')
       } else {
-        setName(user.name)
-        setEmail(user.email)
-        setIsAdmin(user.isAdmin)
+        if(!user || user.id !== Number(params.id)) {
+          dispatch(getUserDetails(params.id))
+        } else {
+          setName(user.name)
+          setEmail(user.email)
+          setIsAdmin(user.isAdmin)
+        }
       }
-    }, [dispatch, user, params.id])
+    }, [dispatch, user, params.id, successEditUser, navigate])
 
     const submitEditUserHandler = (e) => {
       e.preventDefault()
+
+      dispatch(editUser(params.id, {isAdmin}))
     }
 
   return (
@@ -47,6 +60,8 @@ function UserEditScreen() {
           ) : (
             <Form className='my-1' onSubmit={submitEditUserHandler}>
               <h5>UPDATE USER</h5>
+              {loadingEditUser && <Loader />}
+              {errorEditUser && <Message variant="warning">{errorEditUser}</Message>}
               <Form.Group controlId='name'>
                 <Form.Label>Username</Form.Label>
                 <Form.Control
