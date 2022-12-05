@@ -30,7 +30,7 @@ function UserEditScreen() {
         <div className='py-5'  style={{display:'flex', alignItems:'center', justifyContent:'center'}}>
           
           <Form className='my-1' onSubmit={submitEditUserHandler}>
-          <h5>UPDATE USER</h5>
+            <h5>UPDATE USER</h5>
             <Form.Group controlId='name'>
               <Form.Label>Username</Form.Label>
               <Form.Control

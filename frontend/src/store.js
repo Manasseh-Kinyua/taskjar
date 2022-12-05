@@ -3,7 +3,7 @@ import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
 import { projectAddContributorReducer, projectCreateReducer, projectDeleteReducer, projectDetailsReducer, projectEditReducer, projectListReducer } from './reducers/projectReducers'
-import { allUsersReducer, contributorsReducer, userDeleteReducer, userLoginReducer, userRegisterReducer } from './reducers/userReducers'
+import { allUsersReducer, contributorsReducer, userDeleteReducer, userDetailsReducer, userLoginReducer, userRegisterReducer } from './reducers/userReducers'
 import { taskAssignReducer, taskCreateMessageReducer, taskCreateReducer, taskDeleteReducer, taskDetailReducer, taskEditReducer, taskListReducer, taskUpdateToDoneReducer, taskUpdateToInProgressReducer } from './reducers/taskReducers'
 
 const reducer = combineReducers({
@@ -17,6 +17,7 @@ const reducer = combineReducers({
     userRegister: userRegisterReducer,
     userLogin: userLoginReducer,
     allUsers: allUsersReducer,
+    userDetails: userDetailsReducer,
     contributors: contributorsReducer,
     userDelete: userDeleteReducer,
 
