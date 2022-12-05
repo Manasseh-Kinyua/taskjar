@@ -51,6 +51,19 @@ function Header() {
                                     <Nav.Link ><i className="fas fa-shopping-cart"></i>Login</Nav.Link>
                                 </LinkContainer>
                             )}
+
+                            {userInfo && userInfo.isAdmin && (
+                                <div style={{display: 'flex'}}>
+                                    <NavDropdown
+                                        title="Admin"
+                                        id='admin'>
+                                            <LinkContainer
+                                                to='/admin/userlist'>
+                                                    <NavDropdown.Item>Users</NavDropdown.Item>
+                                            </LinkContainer>
+                                    </NavDropdown>
+                              </div>
+                            )}
                             
 
                         </Nav>
