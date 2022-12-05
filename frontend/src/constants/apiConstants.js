@@ -19,4 +19,4 @@ export const DELETE_TASK_ENDPOINT = `${BASE_URL}tasks/delete/`
 
 export const USER_REGISTER_ENDPOINT = `${BASE_URL}users/register/`
 export const USER_LOGIN_ENDPOINT = `${BASE_URL}users/login/`
-export const GET_CONTRIBUTORS = `${BASE_URL}users/contributors/`
+export const GET_CONTRIBUTORS_ENDPOINT = `${BASE_URL}users/contributors/`

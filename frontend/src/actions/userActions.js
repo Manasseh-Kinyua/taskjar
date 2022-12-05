@@ -7,8 +7,12 @@ import {
     USER_REGISTER_REQUEST,
     USER_REGISTER_SUCCESS,
     USER_REGISTER_FAIL,
+
+    GET_CONTRIBUTORS_REQUEST,
+    GET_CONTRIBUTORS_SUCCESS,
+    GET_CONTRIBUTORS_FAIL,
 } from "../constants/userConstants";
-import { USER_LOGIN_ENDPOINT, USER_REGISTER_ENDPOINT } from "../constants/apiConstants";
+import { GET_CONTRIBUTORS_ENDPOINT, USER_LOGIN_ENDPOINT, USER_REGISTER_ENDPOINT } from "../constants/apiConstants";
 import axios from 'axios'
 
 export const register = (name, email, password) => async (dispatch) => {
@@ -73,6 +77,36 @@ export const login = (email, password) => async (dispatch) => {
     } catch(error) {
         dispatch({
             type: USER_LOGIN_FAIL,
+            payload: error.response && error.response.data.detail
+                ? error.response.data.detail
+                : error.message
+        })
+    }
+}
+
+export const getContributors = () => async (dispatch) => {
+    try {
+        dispatch({type: GET_CONTRIBUTORS_REQUEST})
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+
+        const {data} = await axios.get(
+            GET_CONTRIBUTORS_ENDPOINT,
+            config
+        )
+
+        dispatch({
+            type: GET_CONTRIBUTORS_SUCCESS,
+            payload: data
+        })
+
+    } catch(error) {
+        dispatch({
+            type: GET_CONTRIBUTORS_FAIL,
             payload: error.response && error.response.data.detail
                 ? error.response.data.detail
                 : error.message
