@@ -5,8 +5,9 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework import status
-from base.serializers import UserSerializer, UserSerializerWithToken
+from base.serializers import UserSerializer, UserSerializerWithToken, ProjectSerializer
 from django.contrib.auth.models import User
+from base.models import Project
 
 # Create your views here.
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer

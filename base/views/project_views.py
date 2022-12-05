@@ -5,6 +5,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework import status
 from base.models import Project
+from django.contrib.auth.models import User
 from base.serializers import ProjectSerializer
 
 # Create your views here.
@@ -34,6 +35,20 @@ def createProject(request):
     )
     serializer = ProjectSerializer(project, many=False)
 
+    return Response(serializer.data)
+
+
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def addContributors(request, pk):
+    data = request.data
+    user_id = data['user']
+
+    project = Project.objects.get(id=pk)
+    user = User.objects.get(id=user_id)
+
+    project.contributors.add(user)
+    serializer = ProjectSerializer(project, many=False)
     return Response(serializer.data)
 
 @api_view(['PUT'])
