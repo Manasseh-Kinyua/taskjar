@@ -74,7 +74,7 @@ export const contributorsReducer = (state = {}, action) => {
         case GET_CONTRIBUTORS_SUCCESS:
             return {
                 loading: false,
-                users: action.payload
+                selectUsers: action.payload
             }
 
         case GET_CONTRIBUTORS_FAIL:

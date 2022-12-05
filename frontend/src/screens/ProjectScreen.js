@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { Row, Col, Card, ListGroup, Button } from 'react-bootstrap'
+import React, { useEffect, useState } from 'react'
+import { Row, Col, Card, ListGroup, Button, Form } from 'react-bootstrap'
 import Container from '@mui/material/Container';
 import { AvatarGroup } from '@mui/material';
 import { Avatar } from '@mui/material';
@@ -12,8 +12,11 @@ import { useLocation, useParams } from 'react-router-dom'
 import { listProjectDetails } from '../actions/projectActions'
 import Loader from '../components/Loader';
 import Message from '../components/Message';
+import { getContributors } from '../actions/userActions';
 
 function ProjectScreen() {
+
+  const [user, setUser] = useState('')
 
   const params = useParams()
 
@@ -26,11 +29,25 @@ function ProjectScreen() {
 
   const projectDetails = useSelector(state => state.projectDetails)
   const {loading, error, project} = projectDetails
+  console.log(project)
+
+  const userLogin = useSelector(state => state.userLogin)
+  const {userInfo} = userLogin
+  console.log(userInfo)
+
+  const contributors = useSelector(state => state.contributors)
+  const {selectUsers} = contributors
+  console.log('CONTRIBUTORS...', selectUsers)
 
   useEffect(() => {
     dispatch(listProjectDetails(projectId))
+    dispatch(getContributors())
 
   }, [dispatch, projectId])
+
+  const submitAddContributorHandler = (e) => {
+    e.preventDefault()
+  }
 
   return (
     <div>
@@ -87,6 +104,24 @@ function ProjectScreen() {
             <Col md={4}>
               <Card style={{padding:'1rem'}}>
                 <h5 style={{textTransform:'uppercase'}}> <PeopleOutlineIcon /> Contributors({project.contributors && project.contributors.length})</h5>
+                  {project.scrum && userInfo && userInfo.id == project.scrum.id && (
+                    <Form className='my-2' onSubmit={submitAddContributorHandler}>
+                      <h6>Add Contributors</h6>
+                      <Form.Group>
+                        <Form.Select
+                          aria-label
+                          required
+                          value={user}
+                          onChange={(e) => setUser(e.target.value)}>
+                            <option value=''>Select User...</option>
+                            {selectUsers && selectUsers.map(user => (
+                              <option key={user.id} value={user.id}>{user.name}</option>
+                            ))}
+                          </Form.Select>
+                      </Form.Group>
+                      <Button className='my-1' type='submit' style={{width:'100%'}}>Add</Button>
+                    </Form>
+                  )}
                   {project.contributors && project.contributors.map(contributor => (
                     <ListGroup className='my-1' key={contributor.id}>
                       <ListGroup.Item className='py-1' >
