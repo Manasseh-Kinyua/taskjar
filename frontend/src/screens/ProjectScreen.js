@@ -41,10 +41,13 @@ function ProjectScreen() {
   const {loading: loadingAddContributor, error: errorAddContributor, success: successAddContributor} = projectAddContributor
 
   useEffect(() => {
+    if(successAddContributor) {
+      setUser('')
+    }
     dispatch(listProjectDetails(projectId))
     dispatch(getContributors())
 
-  }, [dispatch, projectId])
+  }, [dispatch, projectId, successAddContributor])
 
   const submitAddContributorHandler = (e) => {
     e.preventDefault()
