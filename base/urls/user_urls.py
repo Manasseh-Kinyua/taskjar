@@ -8,5 +8,6 @@ urlpatterns = [
     path('', views.getAllUsers, name='users'),
     path('contributors/', views.getContributors, name='contributors'),
     path('<str:pk>/', views.getSingleUser, name='user'),
+    path('edit/<str:pk>/', views.getSingleUser, name='user'),
     path('delete/<str:pk>/', views.deleteUser, name='delete-user'),
 ]

@@ -72,6 +72,18 @@ def getSingleUser(request, pk):
     serializer = UserSerializer(user, many=False)
     return Response(serializer.data)
 
+@api_view(['PUT'])
+@permission_classes([IsAdminUser])
+def editUserUser(request, pk):
+    data = request.data
+    user = User.objects.get(id=pk)
+
+    user.is_staff = data['sAdmin']
+    
+    user.save()
+    serializer = UserSerializer(user, many=False)
+    return Response(serializer.data)
+
 @api_view(['DELETE'])
 @permission_classes([IsAdminUser])
 def deleteUser(request, pk):

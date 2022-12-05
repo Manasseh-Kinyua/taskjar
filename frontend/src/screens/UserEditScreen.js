@@ -11,7 +11,7 @@ function UserEditScreen() {
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
-    const [isAdmin, setIsAdmin] = useState('')
+    const [isAdmin, setIsAdmin] = useState(false)
 
     const params = useParams()
 
@@ -40,34 +40,41 @@ function UserEditScreen() {
       <Container>
         <Link to='/admin/userlist'>Back to user list</Link>
         <div className='py-5'  style={{display:'flex', alignItems:'center', justifyContent:'center'}}>
-          
-          <Form className='my-1' onSubmit={submitEditUserHandler}>
-            <h5>UPDATE USER</h5>
-            <Form.Group controlId='name'>
-              <Form.Label>Username</Form.Label>
-              <Form.Control
-                type='text'
-                value={name}
-                onChange={(e) => setName(e.target.value)}></Form.Control>
-            </Form.Group>
+          {loading ? (
+            <Loader />
+          ) : error ? (
+            <Message variant='warning'>{error}</Message>
+          ) : (
+            <Form className='my-1' onSubmit={submitEditUserHandler}>
+              <h5>UPDATE USER</h5>
+              <Form.Group controlId='name'>
+                <Form.Label>Username</Form.Label>
+                <Form.Control
+                  type='text'
+                  readOnly
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}></Form.Control>
+              </Form.Group>
 
-            <Form.Group controlId='email'>
-              <Form.Label>Email</Form.Label>
-              <Form.Control
-                type='email'
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}></Form.Control>
-            </Form.Group>
+              <Form.Group controlId='email'>
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                  type='email'
+                  readOnly
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}></Form.Control>
+              </Form.Group>
 
-            <Form.Group controlId='name'>
-              <Form.Check
-                label='IsAdmin'
-                value={isAdmin}
-                onChange={(e) => setIsAdmin(e.target.checked)}></Form.Check>
-            </Form.Group>
+              <Form.Group controlId='name'>
+                <Form.Check
+                  label='Is Admin'
+                  checked={isAdmin}
+                  onChange={(e) => setIsAdmin(e.target.checked)}></Form.Check>
+              </Form.Group>
 
-            <Button type='submit'>Update</Button>
-          </Form>
+              <Button type='submit'>Update</Button>
+            </Form>
+          )}
         </div>
       </Container>
     </div>
