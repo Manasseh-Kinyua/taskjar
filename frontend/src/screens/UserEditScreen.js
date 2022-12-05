@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Container from '@mui/material/Container';
 import { Form, Button } from 'react-bootstrap'
 import Loader from '../components/Loader';
 import Message from '../components/Message';
+import { getUserDetails } from '../actions/userActions';
 
 function UserEditScreen() {
 
@@ -16,9 +17,19 @@ function UserEditScreen() {
 
     const dispatch = useDispatch()
 
-    useEffect(() => {
+    const userDetails = useSelector(state => state.userDetails)
+    const {loading, error, user} = userDetails
+    console.log(user)
 
-    })
+    useEffect(() => {
+      if(!user || user.id !== Number(params.id)) {
+        dispatch(getUserDetails(params.id))
+      } else {
+        setName(user.name)
+        setEmail(user.email)
+        setIsAdmin(user.isAdmin)
+      }
+    }, [dispatch, user, params.id])
 
     const submitEditUserHandler = (e) => {
       e.preventDefault()
@@ -27,6 +38,7 @@ function UserEditScreen() {
   return (
     <div>
       <Container>
+        <Link to='/admin/userlist'>Back to user list</Link>
         <div className='py-5'  style={{display:'flex', alignItems:'center', justifyContent:'center'}}>
           
           <Form className='my-1' onSubmit={submitEditUserHandler}>
@@ -49,7 +61,6 @@ function UserEditScreen() {
 
             <Form.Group controlId='name'>
               <Form.Check
-                as='checkbox'
                 label='IsAdmin'
                 value={isAdmin}
                 onChange={(e) => setIsAdmin(e.target.checked)}></Form.Check>
