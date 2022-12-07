@@ -12,6 +12,10 @@ import {
     USER_PROFILE_SUCCESS,
     USER_PROFILE_FAIL,
 
+    USER_PROFILE_EDIT_REQUEST,
+    USER_PROFILE_EDIT_SUCCESS,
+    USER_PROFILE_EDIT_FAIL,
+
     USER_LIST_REQUEST,
     USER_LIST_SUCCESS,
     USER_LIST_FAIL,
@@ -32,7 +36,7 @@ import {
     GET_CONTRIBUTORS_SUCCESS,
     GET_CONTRIBUTORS_FAIL,
 } from "../constants/userConstants";
-import { DELETE_USER_ENDPOINT, EDIT_USER_ENDPOINT, GET_ALL_USERS_ENDPOINT, GET_CONTRIBUTORS_ENDPOINT, GET_USER_DETAILS_ENDPOINT, GET_USER_PROFILE_ENDPOINT, USER_LOGIN_ENDPOINT, USER_REGISTER_ENDPOINT } from "../constants/apiConstants";
+import { DELETE_USER_ENDPOINT, EDIT_USER_ENDPOINT, EDIT_USER_PROFILE_ENDPOINT, GET_ALL_USERS_ENDPOINT, GET_CONTRIBUTORS_ENDPOINT, GET_USER_DETAILS_ENDPOINT, GET_USER_PROFILE_ENDPOINT, USER_LOGIN_ENDPOINT, USER_REGISTER_ENDPOINT } from "../constants/apiConstants";
 import axios from 'axios'
 
 export const register = (name, email, password) => async (dispatch) => {
@@ -162,6 +166,48 @@ export const getUserProfile = () => async (dispatch, getState) => {
     } catch(error) {
         dispatch({
             type: USER_PROFILE_FAIL,
+            payload: error.response && error.response.data.detail
+                ? error.response.data.detail
+                : error.message
+        })
+    }
+}
+
+export const editUserProfile = (user) => async (dispatch, getState) => {
+    try {
+        dispatch({type: USER_PROFILE_EDIT_REQUEST})
+
+        const {
+            userLogin: {userInfo}
+        } = getState()
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
+
+        const {data} = await axios.put(
+            EDIT_USER_PROFILE_ENDPOINT,
+            user,
+            config
+        )
+
+        dispatch({
+            type: USER_PROFILE_EDIT_SUCCESS,
+            payload: data
+        })
+
+        dispatch({
+            type: USER_LOGIN_SUCCESS,
+            payload: data
+        })
+        localStorage.setItem('userInfo', JSON.stringify(data))
+
+    } catch(error) {
+        dispatch({
+            type: USER_PROFILE_EDIT_FAIL,
             payload: error.response && error.response.data.detail
                 ? error.response.data.detail
                 : error.message

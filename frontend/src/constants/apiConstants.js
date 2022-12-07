@@ -21,6 +21,7 @@ export const DELETE_TASK_ENDPOINT = `${BASE_URL}tasks/delete/`
 export const USER_REGISTER_ENDPOINT = `${BASE_URL}users/register/`
 export const USER_LOGIN_ENDPOINT = `${BASE_URL}users/login/`
 export const GET_USER_PROFILE_ENDPOINT = `${BASE_URL}users/profile/`
+export const EDIT_USER_PROFILE_ENDPOINT = `${BASE_URL}users/profile/edit/`
 export const GET_CONTRIBUTORS_ENDPOINT = `${BASE_URL}users/contributors/`
 export const GET_ALL_USERS_ENDPOINT = `${BASE_URL}users/`
 export const GET_USER_DETAILS_ENDPOINT = `${BASE_URL}users/`

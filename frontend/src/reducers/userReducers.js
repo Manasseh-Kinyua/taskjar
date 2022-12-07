@@ -12,6 +12,10 @@ import {
     USER_PROFILE_SUCCESS,
     USER_PROFILE_FAIL,
 
+    USER_PROFILE_EDIT_REQUEST,
+    USER_PROFILE_EDIT_SUCCESS,
+    USER_PROFILE_EDIT_FAIL,
+
     USER_LIST_REQUEST,
     USER_LIST_SUCCESS,
     USER_LIST_FAIL,
@@ -99,6 +103,31 @@ export const userProfileReducer = (state = {}, action) => {
             }
 
         case USER_PROFILE_FAIL:
+            return {
+                loading: false,
+                error: action.payload
+            }
+
+        default:
+            return state
+    }
+}
+
+export const userProfileEditReducer = (state = {}, action) => {
+    switch(action.type) {
+        case USER_PROFILE_EDIT_REQUEST:
+            return {
+                loading: true
+            }
+
+        case USER_PROFILE_EDIT_SUCCESS:
+            return {
+                loading: false,
+                success: true,
+                userInfo: action.payload
+            }
+
+        case USER_PROFILE_EDIT_FAIL:
             return {
                 loading: false,
                 error: action.payload
