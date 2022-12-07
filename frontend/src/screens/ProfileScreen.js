@@ -25,7 +25,6 @@ function ProfileScreen() {
 
   const userProfile = useSelector(state => state.userProfile)
   const {loading, error, user} = userProfile
-  console.log(user)
 
   const userProfileEdit = useSelector(state => state.userProfileEdit)
   const {loading: loadingEditProfile, error: errorEditProfile} = userProfileEdit

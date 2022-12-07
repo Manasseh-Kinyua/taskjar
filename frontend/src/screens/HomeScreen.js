@@ -8,6 +8,7 @@ import Loader from '../components/Loader';
 import Message from '../components/Message';
 import { Link, useNavigate } from 'react-router-dom';
 import { PROJECT_CREATE_RESET } from '../constants/projectConstants';
+import IntroCarousel from '../components/IntroCarousel';
 
 function HomeScreen() {
 
@@ -41,6 +42,9 @@ function HomeScreen() {
 
   return (
     <Container maxWidth="xl">
+      <Row className='my-3'>
+        <IntroCarousel />
+      </Row>
       <Row>
         <span style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
           <h5>PROJECTS</h5>
