@@ -22,7 +22,6 @@ function UserEditScreen() {
 
     const userDetails = useSelector(state => state.userDetails)
     const {loading, error, user} = userDetails
-    console.log(user)
 
     const userEdit = useSelector(state => state.userEdit)
     const {loading: loadingEditUser, error: errorEditUser, success: successEditUser} = userEdit
