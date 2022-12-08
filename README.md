@@ -5,7 +5,7 @@
 [Manasseh Kinyua](https://github.com/Manasseh-Kinyua)
 
 ## GIF Demo
-
+![](https://github.com/Manasseh-Kinyua/nasseh_gif/blob/master/taskjar.gif)
 
 ## Technologies Used
 * React
