@@ -5,7 +5,7 @@
 [Manasseh Kinyua](https://github.com/Manasseh-Kinyua)
 
 ## GIF Demo
-![estudiar](https://user-images.githubusercontent.com/95216131/202897143-9f4c01a8-f1be-49a1-939d-35549d6af4a4.gif)
+![taskjar](https://github.com/Manasseh-Kinyua/nasseh_gif/blob/master/taskgggggg.gif)
 
 ## Technologies Used
 * React
@@ -19,14 +19,16 @@
 
 ## Features
 1. Authentication & Authorization
-1. Create Study Room
-1. Edit Room
-1. Delete Room
-1. Add Participants
-1. Room Messaging
-1. See Recent Activity
-1. Room Reviewing
-1. See Reviews
+1. Create Project
+1. Add project contributors
+1. Create Project Tasks
+1. Assign Tasks
+1. See task Board
+1. Mark task as In-Progress
+1. Mark Task as Done
+1. Delete Task
+1. Edit Project
+1. Delete Project
 1. User Profile
 1. Edit Profile
 
@@ -34,10 +36,6 @@
  1. See all Users
  1. Give admin status to users
  1. Remove Users
- 1. See all rooms
- 1. Delete room
- 1. See all messages
- 1. Delete message
 
 ## Installation
 1. Download/clone repo.
