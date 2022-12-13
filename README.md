@@ -1,7 +1,7 @@
 # Taskjar
 > Task management is one of the major challenges for teams when working on projects. Taskjar is a task management software aimed at aiding teams with assigment, dispatchment and tracking of tasks.
 
-#Visit Live App
+# Visit Live App
 [TaskJar Software](https://github.com/Manasseh-Kinyua)
 
 # Developer
