@@ -124,14 +124,25 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'taskjar',
+#         'USER': 'nasseh',
+#         'PASSWORD': 'nasseh82473',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'taskjar',
-        'USER': 'nasseh',
-        'PASSWORD': 'nasseh82473',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD': 'TulHAsr3GJusa15FH84G',
+        'HOST': 'containers-us-west-151.railway.app',
+        'PORT': '6886',
     }
 }
 
