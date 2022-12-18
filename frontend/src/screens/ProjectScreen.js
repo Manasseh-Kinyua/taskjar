@@ -17,7 +17,6 @@ import { getContributors } from '../actions/userActions';
 function ProjectScreen() {
 
   const [user, setUser] = useState('')
-  console.log(user)
 
   const params = useParams()
 
