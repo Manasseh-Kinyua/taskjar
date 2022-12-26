@@ -161,6 +161,17 @@ if os.getenv('MODE')=="dev":
        
    }
 # production
+elif os.getenv('MODE')=="prod":
+    DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD': 'TulHAsr3GJusa15FH84G',
+        'HOST': 'containers-us-west-151.railway.app',
+        'PORT': '6886',
+    }
+}
 else:
    DATABASES = {
     "default": dj_database_url.config(default=DATABASE_URL, conn_max_age=1800),
