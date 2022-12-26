@@ -28,6 +28,11 @@ load_dotenv(os.path.join(BASE_DIR, ".env"))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-ot0p864(2daqh!7@nvp($_rneu1g--*(w&1c#_*zciarz!^m0+'
 
+MODE=os.getenv("MODE", default="dev")
+
+DEBUG = os.getenv('DEBUG', default=False)
+
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
@@ -141,12 +146,28 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # }
 
 import dj_database_url
-
 DATABASE_URL = os.getenv("DATABASE_URL")
 
-DATABASES = {
+if os.getenv('MODE')=="dev":
+   DATABASES = {
+       'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'taskjar',
+            'USER': 'nasseh',
+            'PASSWORD': 'nasseh82473',
+            'HOST': 'localhost',
+            'PORT': '5432',
+       }
+       
+   }
+# production
+else:
+   DATABASES = {
     "default": dj_database_url.config(default=DATABASE_URL, conn_max_age=1800),
 }
+
+
+
 
 # DATABASES = {
 #     'default': {
