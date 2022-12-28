@@ -34,7 +34,7 @@ DEBUG = os.getenv('DEBUG', default=False)
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+# DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
