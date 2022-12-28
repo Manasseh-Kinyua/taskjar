@@ -30,7 +30,7 @@ SECRET_KEY = 'django-insecure-ot0p864(2daqh!7@nvp($_rneu1g--*(w&1c#_*zciarz!^m0+
 
 MODE=os.getenv("MODE", default="dev")
 
-DEBUG = os.getenv('DEBUG', default=False)
+DEBUG = os.getenv('DEBUG', default=True)
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
