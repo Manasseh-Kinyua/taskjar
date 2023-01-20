@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Row, Col, Button } from 'react-bootstrap'
+import { Row, Col, Button, Alert } from 'react-bootstrap'
 import Container from '@mui/material/Container';
 import { useDispatch, useSelector } from 'react-redux'
 import { createProject, listProjects } from '../actions/projectActions'
@@ -9,6 +9,7 @@ import Message from '../components/Message';
 import { Link, useNavigate } from 'react-router-dom';
 import { PROJECT_CREATE_RESET } from '../constants/projectConstants';
 import IntroCarousel from '../components/IntroCarousel';
+import GuestUser from '../components/GuetsUser';
 
 function HomeScreen() {
 
@@ -42,6 +43,9 @@ function HomeScreen() {
 
   return (
     <Container maxWidth="xl">
+      <Alert variant='success'>
+        If you are a Recruiter and dont want to create an account, You can login as a Guest User to try my app. <GuestUser />
+      </Alert>
       <Row className='my-3'>
         <IntroCarousel />
       </Row>
