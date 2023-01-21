@@ -51,8 +51,8 @@ function GuestUser() {
             </DialogContentText>
                 <h6>Once you Login: </h6>
                 <ul>
-                    <li>You will be able to shop (Customer's Account)</li>
-                    <li>You also get manager status (Manager's Account)</li>
+                    <li>You will be able to shop (Developer's Account)</li>
+                    <li>You also get manager status (Admin's Account)</li>
                 </ul>
         </DialogContent>
         <DialogActions>
