@@ -36,7 +36,7 @@ DEBUG = os.getenv('DEBUG', default=True)
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'taskjar.up.railway.app', 'taskjar-software.onrender.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'taskjar.up.railway.app', 'taskjar-software-uuv5.onrender.com']
 
 
 # Application definition
