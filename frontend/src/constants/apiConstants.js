@@ -3,7 +3,8 @@ const MODE  = process.env.REACT_APP_MODE
 if(MODE === 'dev') {
     var BASE_URL = "http://127.0.0.1:8000/api/" 
 } else if(MODE === 'prod') {
-    var BASE_URL = "https://taskjar.up.railway.app/api/"
+    // var BASE_URL = "https://taskjar.up.railway.app/api/"
+    var BASE_URL = "https://taskjar-software.onrender.com/api/"
 }
 
 // export const BASE_URL = "https://taskjar.up.railway.app/api/"
