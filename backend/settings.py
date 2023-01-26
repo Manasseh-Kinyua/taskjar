@@ -164,7 +164,7 @@ if os.getenv('MODE')=="dev":
 elif os.getenv('MODE')=="prod":
     DATABASES = {
        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': 'postgres',
             'USER': 'postgres',
             'PASSWORD': 'nasseh82473@',
