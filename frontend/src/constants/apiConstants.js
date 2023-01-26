@@ -4,7 +4,7 @@ if(MODE === 'dev') {
     var BASE_URL = "http://127.0.0.1:8000/api/" 
 } else if(MODE === 'prod') {
     // var BASE_URL = "https://taskjar.up.railway.app/api/"
-    var BASE_URL = "https://taskjar-software-uuv5.onrender.com/api/"
+    var BASE_URL = "https://taskjar-software.vercel.app/api/"
 }
 
 // export const BASE_URL = "https://taskjar.up.railway.app/api/"

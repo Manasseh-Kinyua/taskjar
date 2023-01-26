@@ -163,8 +163,16 @@ if os.getenv('MODE')=="dev":
 # production
 elif os.getenv('MODE')=="prod":
     DATABASES = {
-    "default": dj_database_url.config(default=DATABASE_URL, conn_max_age=1800),
-}
+       'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'postgres',
+            'USER': 'postgres',
+            'PASSWORD': 'nasseh82473@',
+            'HOST': 'db.ipfyoietvtgszkazshzv.supabase.co',
+            'PORT': '5432',
+       }
+       
+   }
 else:
    DATABASES = {
     "default": dj_database_url.config(default=DATABASE_URL, conn_max_age=1800),
