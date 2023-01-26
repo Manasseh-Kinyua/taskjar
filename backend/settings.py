@@ -151,7 +151,7 @@ DATABASE_URL = os.getenv("DATABASE_URL")
 if os.getenv('MODE')=="dev":
    DATABASES = {
        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'ENGINE': 'django.db.backends.postgresql',
             'NAME': 'taskjar',
             'USER': 'nasseh',
             'PASSWORD': 'nasseh82473',
