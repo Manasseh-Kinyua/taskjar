@@ -151,7 +151,7 @@ DATABASE_URL = os.getenv("DATABASE_URL")
 if os.getenv('MODE')=="dev":
    DATABASES = {
        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': 'taskjar',
             'USER': 'nasseh',
             'PASSWORD': 'nasseh82473',
@@ -173,10 +173,10 @@ elif os.getenv('MODE')=="prod":
        }
        
    }
-else:
-   DATABASES = {
-    "default": dj_database_url.config(default=DATABASE_URL, conn_max_age=1800),
-}
+# else:
+#    DATABASES = {
+#     "default": dj_database_url.config(default=DATABASE_URL, conn_max_age=1800),
+# }
 # db_from_env = dj_database_url.config(conn_max_age=500)
 # DATABASES['default'].update(db_from_env)
 
