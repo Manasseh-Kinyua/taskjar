@@ -162,20 +162,20 @@ if os.getenv('MODE')=="dev":
    }
 # production
 elif os.getenv('MODE')=="prod":
-    # DATABASES = {
-    #    'default': {
-    #         'ENGINE': 'django.db.backends.postgresql',
-    #         'NAME': 'postgres',
-    #         'USER': 'postgres',
-    #         'PASSWORD': 'nasseh82473@',
-    #         'HOST': 'db.ipfyoietvtgszkazshzv.supabase.co',
-    #         'PORT': '5432',
-    #     }
-       
-    # }
     DATABASES = {
-    "default": dj_database_url.config(default=DATABASE_URL, conn_max_age=1800),
+       'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'railway',
+            'USER': 'postgres',
+            'PASSWORD': 'Cfj2rIZ3yCVvybuJ3Tx4',
+            'HOST': 'containers-us-west-151.railway.app',
+            'PORT': '6886',
+        }
+       
     }
+    # DATABASES = {
+    # "default": dj_database_url.config(default=DATABASE_URL, conn_max_age=1800),
+    # }
 else:
    DATABASES = {
     "default": dj_database_url.config(default=DATABASE_URL, conn_max_age=1800),

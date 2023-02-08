@@ -1,10 +1,19 @@
+import { createClient } from '@supabase/supabase-js'
 // export const BASE_URL = "http://127.0.0.1:8000/api/"
 const MODE  = process.env.REACT_APP_MODE
 if(MODE === 'dev') {
     var BASE_URL = "http://127.0.0.1:8000/api/" 
 } else if(MODE === 'prod') {
-    // var BASE_URL = "https://taskjar.up.railway.app/api/"
-    var BASE_URL = "https://taskjar-software.vercel.app/api/"
+    var BASE_URL = "https://taskjar.up.railway.app/api/"
+    // var BASE_URL = "https://taskjar-software.vercel.app/api/"
+    // const supabaseAnonKey = process.env.REACT_APP_SUPABASE_ANON_KEY
+    // const config = {
+    //     headers: {
+    //         apiKey: supabaseAnonKey
+    //     }
+    // }
+    // var BASE_URL = "https://ipfyoietvtgszkazshzv.supabase.co/api/"
+    // var BASE_URL = createClient("https://ipfyoietvtgszkazshzv.supabase.co/api/", supabaseAnonKey)
 }
 
 // export const BASE_URL = "https://taskjar.up.railway.app/api/"
